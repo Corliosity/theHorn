@@ -12,16 +12,10 @@
     "url": "https://github.com/Corliosity/theHorn.git"
   },
   "keywords": [
-    "The",
-    "Bugle",
-    "The",
-    "Horn",
-    "Audio",
-    "newspaper",
-    "for",
-    "a",
-    "visual",
-    "world",
+    "The Bugle",
+    "The Horn",
+    "Audio newspaper",
+    "visual world",
     "Puns",
     "Bugle",
     "Fans"
@@ -32,7 +26,12 @@
     "url": "https://github.com/Corliosity/theHorn/issues"
   },
   "dependencies": {
-    "express": "~4.13.2"
+    "express": "~4.13.2",
+    "body-parser": "~1.13.3",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "jade": "~1.11.0",
+    "morgan": "~1.6.1"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
@@ -40,6 +39,7 @@
     "grunt-contrib-uglify": "~0.9.1",
     "grunt-contrib-compass": "~1.0.3",
     "grunt-contrib-concat": "~0.5.1",
-    "grunt-contrib-cssmin": "~0.13.0"
+    "grunt-contrib-cssmin": "~0.13.0",
+    "grunt-contrib-jade": "~0.15.0"
   }
 }
