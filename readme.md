@@ -1,4 +1,4 @@
-# The Horn - Because The Bugle was already taken
+# The Bulgr - With Loving Respect to **The Bugle**
 
 ## A community driven project of Bugle lovers
 
