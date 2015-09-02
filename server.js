@@ -1,5 +1,6 @@
 var express,
 	app,
+	http,
 	server,
 	router,
 	admin,
@@ -9,19 +10,23 @@ var express,
 	path,
 	logger,
 	cookieParser,
-	bodyParser;
+	bodyParser,
+	multipart;
 
-express 		= require('express'),
-staticSite		= require('./route'),
-admin			= require('./admin'),
-environment 	= process.env,
-fs				= require('fs'),
-path			= require('path'),
-logger			= require('morgan'),
-cookieParser	= require('cookie-parser'),
-bodyParser		= require('body-parser'),
+express 		= require('express'), // Framework to help setup quick NODE applications
+http			= require('http'), 	  // Creates HTTP headers and functions
+staticSite		= require('./routing/baseWeb'), // File contains router for our Base web site (Index, Podcast, About)
+admin			= require('./routing/admin'),   // File contains router for Admin application
+environment 	= process.env, 		  // Create a global variable to easily call envionrment functions
+fs				= require('fs'),      // Filereader module - using for podcast MP3
+path			= require('path'),    // Pathing helper funcitons
+logger			= require('morgan'),  // Logging to the console - > need to make sure this can save information to file on server
+cookieParser	= require('cookie-parser'), // Cookie creation, parsing, and reading helper functions
+bodyParser		= require('body-parser'),   // Helps to get data from DOM elements in POST requests.
 app 			= express(),
-appSettings		= app.settings;
+appSettings		= app.settings,
+multipart		= require('connect-multiparty'), // Helper functions for Audio/Video support
+port 			= environment.PORT || 80;        // Initial Port setup to ensure NODE server will run properly in Produciton
 
 /**
  * Application Setup
@@ -32,20 +37,33 @@ appSettings		= app.settings;
 app.set('view engine', 'jade');
 app.set('view cache', false);
 
-// Use Source FOlDER for development MODE - Grunt will create a distribution  folder
+// Use Source FOLDER for development MODE - Grunt will create a distribution  folder
+// Setup where the static views (HTML, CSS, and JS) can be read from.
+// Source is our development environment folder
+// Dist is our 'distribution' environment folder
+// TODO : Create Grunt tasks to automate front-end (not creating minimiaztion on server due to possible security issues)
+
 if (appSettings.env !== "production") {
 
 	app.set('views', __dirname + '/source');
 
 } else {
+	app.set('views', __dirname + '/dist');
 }
 
+// Setup application to log issues in development mode
+// Call Body Parser helper funcitons to read in POST data (User Logins)
+// Setup Cookies, and Audio helper functions
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : false }));
 app.use(cookieParser());
+app.use(multipart({}));
 
-
+/**
+ * If we need to set global headers use the below method
+ */
+// app.use(function(res, req, next) { /* Header Logic goes here */ });
 
 /**
  * Routing setup 
@@ -57,13 +75,21 @@ app.use('/', staticSite);
 
 /**
  * 404 Error Handler
- * Creates an error objec to be used and passed to pages.
+ * Creates an error object to be used and passed to pages.
+ * TODO move this out of the server.js
+ * TODO create generic 500/404 page
+ * NOTE this must always be the last route called (i.e. if the server cannot find any other routes this will be called)
  */
 app.use(function(err, req, res, next) {
   // logic - TODO: Create Error handling here
+  if (res.headersSent) {
+    return next(err);
+  }
+  res.status(404);
+  res.render('error', { error: err });
 });
 
-server = app.listen(8080, function() {
+server = app.listen(port, function() {
 
 	var host,
 		port;
@@ -73,4 +99,5 @@ server = app.listen(8080, function() {
 
 });
 
+// Export the Application Variable as a common JS module in case it needs to be used in other functiosn on the server
 module.exports = app;

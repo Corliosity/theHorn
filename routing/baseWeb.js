@@ -9,11 +9,11 @@ router.use(function timeLog(req, res, next) {
 });
 
 router.get('/', function(request, response) {
-	response.render('index', { title : 'The Horn' });	
+	response.render('index', { title : 'The Buglr' });	
 });
 
 router.get('/about', function(request, response){
-	response.render('about', { title : 'About - The Horn' });
+	response.render('about', { title : 'About - The Buglr' });
 });
 
 module.exports = router;
