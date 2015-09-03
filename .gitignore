@@ -1,0 +1,9 @@
+# Git ignore file to make sure we do not push or have git handle anything it does not need
+# Ignore the modules - these are installed from package.json and command line/terminal
+/node_modules/
+
+#ignore the distribution directory (when exists)
+/dist/
+
+#ignore any css inside of source
+/source/css/
