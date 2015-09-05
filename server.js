@@ -12,7 +12,7 @@ var express,
 	cookieParser,
 	bodyParser,
 	multipart,
-	port;
+	appPort;
 
 // TODO : Import Bunyan - Modify Morgan for better logging and take out console.log from application
 
@@ -29,8 +29,7 @@ bodyParser		= require('body-parser');   // Helps to get data from DOM elements i
 app 			= express();
 appSettings		= app.settings;
 multipart		= require('connect-multiparty'); // Helper functions for Audio/Video support
-port 			= environment.PORT || 80;        // Initial Port setup to ensure NODE server will run properly in Produciton
-
+appPort			= environment.PORT || 8080;
 /**
  * Application Setup
  *
@@ -57,7 +56,8 @@ if (appSettings.env !== "production") {
 // Setup application to log issues in development mode
 // Call Body Parser helper funcitons to read in POST data (User Logins)
 // Setup Cookies, and Audio helper functions
-app.use(logger('combined'));
+var logStream = fs.createWriteStream(__dirname + '/server_log.log');
+app.use(logger('combined', {stream : logStream}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : false }));
 app.use(cookieParser());
@@ -92,7 +92,7 @@ app.use(function(err, req, res, next) {
   res.render('error', { error: err });
 });
 
-server = app.listen(port, function() {
+server = app.listen(appPort, function() {
 
 	var host,
 		port;

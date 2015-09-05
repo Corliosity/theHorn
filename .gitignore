@@ -7,3 +7,7 @@
 
 #ignore any css inside of source
 /source/css/
+
+#ignore the logging files for git
+access.log
+server_log.log
