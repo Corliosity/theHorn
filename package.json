@@ -32,7 +32,10 @@
     "debug": "~2.2.0",
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
-    "connect-multiparty": "~2.0.0"
+    "connect-multiparty": "~2.0.0",
+    "nodeunit": "~0.9.1",
+    "mocha": "~2.3.0",
+    "chai": "~3.2.0"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
