@@ -1,0 +1,48 @@
+module.exports = function(grunt) {
+
+	require('load-grunt-tasks')(grunt);
+
+	
+	grunt.initConfig({
+
+		pkg: grunt.file.readJSON('package.json'),
+
+		jshint: {
+			files : ['Gruntfile.js', 'server.js'],
+			options : {
+				globals : {
+					jQuery : true
+				}
+			}
+		},
+
+		uglify : {
+
+		},
+
+		concat : {
+
+			},
+
+		jade : {
+			debug : {
+				options : {
+					pretty : true,
+				},
+				files : [{
+					expand: true,
+					cwd : 'source',
+					src : '*.jade',
+					dest : 'dist/templates',
+					ext : '.html'
+				}]
+			}
+		},
+
+		watch : {
+			files : ['<%= jshint.files %>'],
+			tasks : ['jshint']
+		}
+	});
+
+};
