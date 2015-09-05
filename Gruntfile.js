@@ -40,8 +40,14 @@ module.exports = function(grunt) {
 		},
 
 		watch : {
-			files : ['<%= jshint.files %>'],
-			tasks : ['jshint']
+			jshint : {
+				files : ['<%= jshint.files %>'],
+				tasks : ['jshint']
+			},
+			jade : {
+				files : ['source/**/*.jade'],
+				tasks : ['jade']
+			}
 		}
 	});
 
