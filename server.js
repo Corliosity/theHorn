@@ -11,21 +11,24 @@ var express,
 	logger,
 	cookieParser,
 	bodyParser,
-	multipart;
+	multipart,
+	port;
 
-express 		= require('express'), // Framework to help setup quick NODE applications
-http			= require('http'), 	  // Creates HTTP headers and functions
-staticSite		= require('./routing/baseWeb'), // File contains router for our Base web site (Index, Podcast, About)
-admin			= require('./routing/admin'),   // File contains router for Admin application
-environment 	= process.env, 		  // Create a global variable to easily call envionrment functions
-fs				= require('fs'),      // Filereader module - using for podcast MP3
-path			= require('path'),    // Pathing helper funcitons
-logger			= require('morgan'),  // Logging to the console - > need to make sure this can save information to file on server
-cookieParser	= require('cookie-parser'), // Cookie creation, parsing, and reading helper functions
-bodyParser		= require('body-parser'),   // Helps to get data from DOM elements in POST requests.
-app 			= express(),
-appSettings		= app.settings,
-multipart		= require('connect-multiparty'), // Helper functions for Audio/Video support
+// TODO : Import Bunyan - Modify Morgan for better logging and take out console.log from application
+
+express 		= require('express'); // Framework to help setup quick NODE applications
+http			= require('http'); 	  // Creates HTTP headers and functions
+staticSite		= require('./routing/baseWeb'); // File contains router for our Base web site (Index, Podcast, About)
+admin			= require('./routing/admin');   // File contains router for Admin application
+environment 	= process.env;		  // Create a global variable to easily call envionrment functions
+fs				= require('fs');      // Filereader module - using for podcast MP3
+path			= require('path');    // Pathing helper funcitons
+logger			= require('morgan');  // Logging to the console - > need to make sure this can save information to file on server
+cookieParser	= require('cookie-parser'); // Cookie creation, parsing, and reading helper functions
+bodyParser		= require('body-parser');   // Helps to get data from DOM elements in POST requests.
+app 			= express();
+appSettings		= app.settings;
+multipart		= require('connect-multiparty'); // Helper functions for Audio/Video support
 port 			= environment.PORT || 80;        // Initial Port setup to ensure NODE server will run properly in Produciton
 
 /**
@@ -54,7 +57,7 @@ if (appSettings.env !== "production") {
 // Setup application to log issues in development mode
 // Call Body Parser helper funcitons to read in POST data (User Logins)
 // Setup Cookies, and Audio helper functions
-app.use(logger('dev'));
+app.use(logger('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : false }));
 app.use(cookieParser());

@@ -4,7 +4,6 @@ var router 	= express.Router();
 // Create a timelog of events that can be sent to a logger function
 router.use(function timeLog(req, res, next) {
   
-  console.log('Time: ', Date.now());
   next();
 });
 
