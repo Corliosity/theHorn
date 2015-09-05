@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 
 		jshint: {
-			files : ['Gruntfile.js', 'server.js'],
+			files : ['Gruntfile.js', 'server.js', 'routing/**/*.js', 'source/_assets/js/**/*.js'],
 			options : {
 				globals : {
 					jQuery : true

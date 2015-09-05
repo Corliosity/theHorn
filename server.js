@@ -34,12 +34,13 @@ app 			= express();
 appSettings		= app.settings;
 multipart		= require('connect-multiparty'); // Helper functions for Audio/Video support
 appPort			= environment.PORT || 8080;
-logFolder       = __dirname + '/server_log.log';
+logFolder       = __dirname + '/server_log.log'; // Declare the location for all log files
 /**
  * Application Setup
  *
  * Set rules for Main Directory, Templates, Parse and Logging
- *
+ * First Declare our view engine - Jade (May change to HTML for PROD)
+ * Tell Applicaiton to not cache
  */
 app.set('view engine', 'jade');
 app.set('view cache', false);
@@ -61,6 +62,7 @@ if (appSettings.env !== "production") {
 // Setup application to log server requests and write to folder
 // Call Body Parser helper funcitons to read in POST data (User Logins)
 // Setup Cookies, and Audio helper functions
+
 logStream = fs.createWriteStream(logFolder);
 
 app.use(logger('combined', {stream : logStream}));
@@ -79,9 +81,11 @@ app.use(multipart({}));
  * param1 {object} - What route to handle
  * param2 {object} - Module to use
  */
+
 app.use('/', staticSite);
 app.use('/admin', admin);
 app.use('/api', adminAPI);
+
 /**
  * 404 Error Handler
  * Creates an error object to be used and passed to pages.
@@ -89,10 +93,14 @@ app.use('/api', adminAPI);
  * TODO create generic 500/404 page
  * NOTE this must always be the last route called (i.e. if the server cannot find any other routes this will be called)
  */
+ app.use(function(err, req, res, next){
+  // error page
+  res.status(500).render('error', {error : '500'});
+});
+
 app.use(function(req, res, next) {
   // logic - TODO: Create Error handling here
-
-  res.status(404).render('error', { error: 'Whoops something went wrong' });
+  res.status(404).render('error', { error: req.originalUrl });
 });
 
 server = app.listen(appPort, function() {
