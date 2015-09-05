@@ -6,15 +6,14 @@ var express = require('express');
 var router = express.Router();
 
 router.use(function timelog(req, res, next) {
-
-	console.log('Time: ', Date.now());
+	// Setup all necessary header elements in here
 	// Note next is just telling the app to continue with the next possible function
 	next();
 });
 
-router.get('/admin', function(req, res) {
-
-	res.send("Oh you want to log in to create podcasts...well hold on a minute");
+router.get('/', function(request, response) {
+	response.send("Hello");
+	//response.render("error");
 });
 
 

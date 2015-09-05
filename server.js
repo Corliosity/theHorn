@@ -4,6 +4,7 @@ var express,
 	server,
 	router,
 	admin,
+	adminAPI,
 	environment,
 	appSettings,
 	fs,
@@ -12,7 +13,9 @@ var express,
 	cookieParser,
 	bodyParser,
 	multipart,
-	appPort;
+	appPort,
+	logFolder,
+	logStream;
 
 // TODO : Import Bunyan - Modify Morgan for better logging and take out console.log from application
 
@@ -20,6 +23,7 @@ express 		= require('express'); // Framework to help setup quick NODE applicatio
 http			= require('http'); 	  // Creates HTTP headers and functions
 staticSite		= require('./routing/baseWeb'); // File contains router for our Base web site (Index, Podcast, About)
 admin			= require('./routing/admin');   // File contains router for Admin application
+adminAPI        = require('./routing/api/admin');
 environment 	= process.env;		  // Create a global variable to easily call envionrment functions
 fs				= require('fs');      // Filereader module - using for podcast MP3
 path			= require('path');    // Pathing helper funcitons
@@ -30,6 +34,7 @@ app 			= express();
 appSettings		= app.settings;
 multipart		= require('connect-multiparty'); // Helper functions for Audio/Video support
 appPort			= environment.PORT || 8080;
+logFolder       = __dirname + '/server_log.log';
 /**
  * Application Setup
  *
@@ -53,10 +58,11 @@ if (appSettings.env !== "production") {
 	app.set('views', __dirname + '/dist');
 }
 
-// Setup application to log issues in development mode
+// Setup application to log server requests and write to folder
 // Call Body Parser helper funcitons to read in POST data (User Logins)
 // Setup Cookies, and Audio helper functions
-var logStream = fs.createWriteStream(__dirname + '/server_log.log');
+logStream = fs.createWriteStream(logFolder);
+
 app.use(logger('combined', {stream : logStream}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : false }));
@@ -74,8 +80,8 @@ app.use(multipart({}));
  * param2 {object} - Module to use
  */
 app.use('/', staticSite);
-
-
+app.use('/admin', admin);
+app.use('/api', adminAPI);
 /**
  * 404 Error Handler
  * Creates an error object to be used and passed to pages.
@@ -83,13 +89,10 @@ app.use('/', staticSite);
  * TODO create generic 500/404 page
  * NOTE this must always be the last route called (i.e. if the server cannot find any other routes this will be called)
  */
-app.use(function(err, req, res, next) {
+app.use(function(req, res, next) {
   // logic - TODO: Create Error handling here
-  if (res.headersSent) {
-    return next(err);
-  }
-  res.status(404);
-  res.render('error', { error: err });
+
+  res.status(404).render('error', { error: 'Whoops something went wrong' });
 });
 
 server = app.listen(appPort, function() {
