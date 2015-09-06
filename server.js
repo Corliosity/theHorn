@@ -106,12 +106,24 @@ app.use(function(req, res, next) {
 function serverFinal() {
 
 	var host,
-		port;
+		port,
+		serverOnStart;
 
 	host = app.server.address().address;
 	port = app.server.address().port;
 
 	// Write information to log files
+	// Doing this can give us more information through nodemon without using the console
+	serverOnStart = JSON.stringify({"Host" : host, "Port" : port});
+
+	fs.writeFile('status_log.log', serverOnStart,function(err) {
+		
+		if (!err) {
+
+		} else {
+			throw err;
+		}
+	});
 };
 
 // Create HTTP server
