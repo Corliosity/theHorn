@@ -1,7 +1,7 @@
 var express,
 	app,
 	http,
-	server,
+	serverFinal,
 	router,
 	admin,
 	adminAPI,
@@ -103,15 +103,21 @@ app.use(function(req, res, next) {
   res.status(404).render('error', { error: req.originalUrl });
 });
 
-server = app.listen(appPort, function() {
+function serverFinal() {
 
 	var host,
 		port;
 
-	host = server.address().address;
-	port = server.address().port;
+	host = app.server.address().address;
+	port = app.server.address().port;
 
-});
+	// Write information to log files
+};
+
+// Create HTTP server
+// TODO : Get certificates to setup as HTTPS server - (if affordable)
+app.server = http.createServer(app);
+app.server.listen(appPort, serverFinal);
 
 // Export the Application Variable as a common JS module in case it needs to be used in other functiosn on the server
 module.exports = app;
