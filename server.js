@@ -114,7 +114,7 @@ function serverFinal() {
 
 	// Write information to log files
 	// Doing this can give us more information through nodemon without using the console
-	serverOnStart = JSON.stringify({"Host" : host, "Port" : port});
+	serverOnStart = JSON.stringify({"Host" : host, "Port" : port, "Settings" : appSettings});
 
 	fs.writeFile('status_log.log', serverOnStart,function(err) {
 		
