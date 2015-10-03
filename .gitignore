@@ -7,6 +7,6 @@
 
 #ignore any css inside of source
 /source/css/
-
+*.sass-cache/
 #ignore the logging files for git
 *.log

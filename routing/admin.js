@@ -5,7 +5,7 @@
 var express = require('express');
 var router = express.Router();
 
-router.use(function timelog(req, res, next) {
+router.use(function(req, res, next) {
 	// Setup all necessary header elements in here
 	// Note next is just telling the app to continue with the next possible function
 	next();
