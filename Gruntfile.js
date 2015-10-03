@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 
 		jshint: {
-			files : ['Gruntfile.js', 'server.js', 'routing/**/*.js', 'source/_assets/js/**/*.js'],
+			files : ['Gruntfile.js', 'server.js', 'routing/**/*.js'],
 			options : {
 				globals : {
 					jQuery : true
@@ -22,6 +22,22 @@ module.exports = function(grunt) {
 
 		concat : {
 
+		},
+
+		compass: {                  // Task
+			dist: {                   // Target
+				options: {              // Target options
+					sassDir: 'sass',
+					cssDir: 'css',
+					environment: 'production'
+				}
+			},
+			dev: {                    // Another target
+				options: {
+					sassDir: 'source/assets/sass',
+					cssDir: 'source/assets/css'
+				}
+			}
 		},
 
 		jade : {
@@ -47,8 +63,16 @@ module.exports = function(grunt) {
 			jade : {
 				files : ['source/**/*.jade'],
 				tasks : ['jade']
+			},
+			buildcss : {
+				files : ['source/**/*.scss'],
+				tasks : ['compass:dev']
 			}
 		}
 	});
+
+	grunt.registerTask('default', []);
+
+	grunt.registerTask('buildsass', ['compass:dev']);
 
 };

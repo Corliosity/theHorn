@@ -14,7 +14,8 @@ var express,
 	bodyParser,
 	multipart,
 	appPort,
-	logFolder,
+	logErrors,
+	logHTTP,
 	logStream;
 
 // TODO : Import Bunyan - Modify Morgan for better logging and take out console.log from application
@@ -34,7 +35,8 @@ app 			= express();
 appSettings		= app.settings;
 multipart		= require('connect-multiparty'); // Helper functions for Audio/Video support
 appPort			= environment.PORT || 8080;
-logFolder       = __dirname + '/server_log.log'; // Declare the location for all log files
+logFolder       = __dirname + '/logs/server_log.log'; // Declare the location for all log files
+logHTTP			= __dirname + '/logs/status_log.log';
 /**
  * Application Setup
  *
@@ -54,7 +56,7 @@ app.set('view cache', false);
 if (appSettings.env !== "production") {
 
 	app.set('views', __dirname + '/source');
-
+	app.use(express.static(__dirname + '/source'));
 } else {
 	app.set('views', __dirname + '/dist');
 }
@@ -105,7 +107,7 @@ app.use(function(req, res, next) {
 
 function sendLog(logInfo) {
 
-	fs.writeFile('status_log.log', logInfo, {flag : 'a'});
+	fs.writeFile(logHTTP, logInfo, {flag : 'a'});
 }
 
 function serverFinal() {

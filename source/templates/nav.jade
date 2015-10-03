@@ -1,8 +1,13 @@
-div.logo The Buglr
-nav
-	ul
-		li: a(href="#") Home
-		li: a(href="#") Episodes
-		li: a(href="#") About
-		li: a(href="#") Support
-		li: a(href="#") Contact
+div.contain-to-grid
+	nav.top-bar(data-topbar,role='navigation')
+		ul.title-area
+			li.toggle-topbar.menu-icon: a(href='/'): span Menu
+		section.top-bar-section
+			ul.right
+				li: a(href='/') Home
+				li: a(href='podcast') Episodes
+				li: a(href='about') About
+				li: a(href='#') Support
+				li: a(href='#') Contact
+			ul.left
+				li: a(href='#'): div.logo The Buglr
