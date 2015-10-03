@@ -1,7 +1,7 @@
 var express,
 	app,
 	http,
-	server,
+	serverFinal,
 	router,
 	admin,
 	adminAPI,
@@ -14,7 +14,8 @@ var express,
 	bodyParser,
 	multipart,
 	appPort,
-	logFolder,
+	logErrors,
+	logHTTP,
 	logStream;
 
 // TODO : Import Bunyan - Modify Morgan for better logging and take out console.log from application
@@ -34,7 +35,8 @@ app 			= express();
 appSettings		= app.settings;
 multipart		= require('connect-multiparty'); // Helper functions for Audio/Video support
 appPort			= environment.PORT || 8080;
-logFolder       = __dirname + '/server_log.log'; // Declare the location for all log files
+logFolder       = __dirname + '/logs/server_log.log'; // Declare the location for all log files
+logHTTP			= __dirname + '/logs/status_log.log';
 /**
  * Application Setup
  *
@@ -54,7 +56,7 @@ app.set('view cache', false);
 if (appSettings.env !== "production") {
 
 	app.set('views', __dirname + '/source');
-
+	app.use(express.static(__dirname + '/source'));
 } else {
 	app.set('views', __dirname + '/dist');
 }
@@ -103,15 +105,31 @@ app.use(function(req, res, next) {
   res.status(404).render('error', { error: req.originalUrl });
 });
 
-server = app.listen(appPort, function() {
+function sendLog(logInfo) {
+
+	fs.writeFile(logHTTP, logInfo, {flag : 'a'});
+}
+
+function serverFinal() {
 
 	var host,
-		port;
+		port,
+		serverOnStart;
 
-	host = server.address().address;
-	port = server.address().port;
+	host = app.server.address().address;
+	port = app.server.address().port;
 
-});
+	// Write information to log files
+	// Doing this can give us more information through nodemon without using the console
+	serverOnStart = JSON.stringify({"Host" : host, "Port" : port, "Settings" : appSettings});
+
+	sendLog(serverOnStart);
+}
+
+// Create HTTP server
+// TODO : Get certificates to setup as HTTPS server - (if affordable)
+app.server = http.createServer(app);
+app.server.listen(appPort, serverFinal);
 
 // Export the Application Variable as a common JS module in case it needs to be used in other functiosn on the server
 module.exports = app;

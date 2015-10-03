@@ -9,5 +9,4 @@
 /source/css/
 
 #ignore the logging files for git
-access.log
-server_log.log
+*.log
