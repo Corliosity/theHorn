@@ -60,10 +60,6 @@ module.exports = function(grunt) {
 				files : ['<%= jshint.files %>'],
 				tasks : ['jshint']
 			},
-			jade : {
-				files : ['source/**/*.jade'],
-				tasks : ['jade']
-			},
 			buildcss : {
 				files : ['source/**/*.scss'],
 				tasks : ['compass:dev']
