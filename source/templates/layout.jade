@@ -6,6 +6,11 @@ html(lang="en")
 		link(href='/assets/css/main.css', rel='stylesheet')
 		include startup.jade
 	body
+		script(type='text/javascript').
+			var configuration = {
+				startUrl : '',
+				localKey : 'BuglrPodcast'
+			};
 		include nav.jade
 		block bodyContent
 		include footer.jade
