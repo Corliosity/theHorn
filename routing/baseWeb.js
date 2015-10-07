@@ -11,12 +11,16 @@ router.get('/:var(home)?', function(request, response) {
 	response.render('index', { title : 'The Buglr' });	
 });
 
-router.get('/about', function(request, response){
-	response.render('about', { title : 'About - The Buglr' });
-});
+// router.get('/about', function(request, response){
+// 	response.render('about', { title : 'About - The Buglr' });
+// });
 
-router.get('/podcast', function(request, response) {
-	response.render('podcast', { title : 'Podcast - The Buglr' });
+// router.get('/podcast', function(request, response) {
+// 	response.render('podcast', { title : 'Podcast - The Buglr' });
+// });
+
+router.get('contact', function(request, response) {
+	response.render('contact', { title : 'Contact - The Buglr' });
 });
 
 module.exports = router;

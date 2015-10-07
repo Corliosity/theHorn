@@ -10,3 +10,4 @@
 *.sass-cache/
 #ignore the logging files for git
 *.log
+*.DS_Store

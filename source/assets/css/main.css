@@ -5123,61 +5123,62 @@ th.hide-for-touch {
 .contain-to-grid.footer {
   display: block;
   box-sizing: border-box;
-  margin-top: 3em;
   padding-top: 1em;
   width: 100%;
   background-color: #777;
-  position: fixed;
-  bottom: 0;
+  height: 100%;
 }
 
+/* line 11, ../sass/_custom.scss */
+#appRegion {
+  height: 80%;
+}
 /* line 13, ../sass/_custom.scss */
-.main {
-  height: 55%;
-}
-/* line 15, ../sass/_custom.scss */
-.main .right-content {
+#appRegion .right-content {
   border-right: 1px solid #ccc;
-  height: auto;
+  height: 100%;
+  margin-top: 0.3125rem;
 }
 
-/* line 21, ../sass/_custom.scss */
+/* line 20, ../sass/_custom.scss */
 .title-row {
   width: 100%;
   background: #eaeaea;
 }
-/* line 24, ../sass/_custom.scss */
-.title-row h1 {
-  padding: 1.5625rem;
-}
 
-/* line 28, ../sass/_custom.scss */
+/* line 24, ../sass/_custom.scss */
 .margin-10 {
   margin-top: 0.625rem;
   margin-bottom: 0.625rem;
 }
 
+/* line 28, ../sass/_custom.scss */
+.padding-20 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
 /* Audio Playing style */
-/* line 34, ../sass/_custom.scss */
+/* line 33, ../sass/_custom.scss */
 .player {
   background: #eaeaea;
   border: 1px solid #777;
   height: 3rem;
 }
 
-/* line 39, ../sass/_custom.scss */
+/* line 38, ../sass/_custom.scss */
 .range-slider-handle {
   top: -0.1rem;
   height: 1rem;
   border-radius: 0;
 }
 
-/* line 44, ../sass/_custom.scss */
+/* line 43, ../sass/_custom.scss */
 .range-slider.round .range-slider-handle {
   border-radius: 0;
 }
 
-/* line 47, ../sass/_custom.scss */
+/* line 46, ../sass/_custom.scss */
 .range-slider.round {
   background: #333;
   border-radius: 0;
