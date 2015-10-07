@@ -1,0 +1,1 @@
+Buglr.EpisodeModel = Backbone.Model.extend({});
