@@ -18,10 +18,10 @@ $rem-base: 16px;
 // Since the typical default browser font-size is 16px, that makes the calculation for grid size.
 // If you want your base font-size to be different and not have it affect the grid breakpoints,
 // set $rem-base to $base-font-size and make sure $base-font-size is a px value.
-$base-font-size: 100%;
+$base-font-size: rem-calc(16);
 
 // The $base-line-height is 100% while $base-font-size is 150%
-$base-line-height: 150%;
+$base-line-height: 100%;
 
 // We use this to control whether or not CSS classes come through in the gem files.
 $include-html-classes: true;
@@ -41,9 +41,10 @@ $total-columns: 12;
 // We use these to control various global styles
 $body-bg: #fff;
 // $body-font-color: #222;
-// $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-// $body-font-weight: normal;
-// $body-font-style: normal;
+$body-font-family: Verdana, "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$body-font-weight: normal;
+$body-font-style: normal;
+$body-line-spacing: 0.2;
 
 // We use this to control font-smoothing
 $font-smoothing: antialiased;
@@ -62,8 +63,8 @@ $warning-color: #f08a24;
 $info-color: #a0d3e8;
 
 // We use these to make sure border radius matches unless we want it different.
-// $global-radius: 3px;
-// $global-rounded: 1000px;
+$global-radius: 3px;
+$global-rounded: 1000px;
 
 // We use these to control inset shadow shiny edges and depressions.
 // $shiny-edge-size: 0 1px 0;
@@ -118,7 +119,7 @@ $large-only: "#{$screen} and (min-width:#{lower-bound($large-range)}) and (max-w
 // $include-html-type-classes: $include-html-classes;
 
 // We use these to control header font styles
-// $header-font-family: $body-font-family;
+$header-font-family: 'Roboto', 'Helvetica', Arial, sans-serif;;
 // $header-font-weight: normal;
 // $header-font-style: normal;
 $header-font-color: #222;
@@ -1248,26 +1249,26 @@ $include-html-clearing-classes: $include-html-classes;
 // RANGE SLIDER
 //
 
-// $include-html-range-slider-classes: $include-html-classes;
+$include-html-range-slider-classes: $include-html-classes;
 
 // These variabels define the slider bar styles
-// $range-slider-bar-width: 100%;
-// $range-slider-bar-height: rem-calc(16);
+$range-slider-bar-width: 100%;
+$range-slider-bar-height: rem-calc(16);
 
-// $range-slider-bar-border-width: 1px;
-// $range-slider-bar-border-style: solid;
-// $range-slider-bar-border-color: #ddd;
-// $range-slider-radius: $global-radius;
-// $range-slider-round: $global-rounded;
-// $range-slider-bar-bg-color: #fafafa;
+$range-slider-bar-border-width: 1px;
+$range-slider-bar-border-style: solid;
+$range-slider-bar-border-color: #ddd;
+$range-slider-radius: $global-radius;
+$range-slider-round: $global-rounded;
+$range-slider-bar-bg-color: #fafafa;
 
 // Vertical bar styles
-// $range-slider-vertical-bar-width: rem-calc(16);
-// $range-slider-vertical-bar-height: rem-calc(200);
+$range-slider-vertical-bar-width: rem-calc(16);
+$range-slider-vertical-bar-height: rem-calc(200);
 
 // These variabels define the slider handle styles
-// $range-slider-handle-width: rem-calc(32);
-// $range-slider-handle-height: rem-calc(22);
+$range-slider-handle-width: rem-calc(32);
+$range-slider-handle-height: rem-calc(22);
 // $range-slider-handle-position-top: rem-calc(-5);
 // $range-slider-handle-bg-color: $primary-color;
 // $range-slider-handle-border-width: 1px;
@@ -1277,3 +1278,26 @@ $include-html-clearing-classes: $include-html-classes;
 // $range-slider-handle-round: $global-rounded;
 // $range-slider-handle-bg-hover-color: scale-color($primary-color, $lightness: -12%);
 // $range-slider-handle-cursor: pointer;
+
+/* Icon Font Styles */
+$icon-home:			"\e600";
+$icon-podcast:		"\e800";
+$icon-spinner:		"\e601";
+$icon-star-empty:	"\e602";
+$icon-star-full:	"\e603";
+$icon-warning:		"\e801";
+$icon-notification: "\e802";
+$icon-info:			"\e803";
+$icon-cancel-circle: "\e804";
+$icon-play2:		"\e805";
+$icon-pause:		"\e806";
+$icon-stop:			"\e807";
+$icon-volume-high:	"\e808";
+$icon-volume-mute:	"\e809";
+$icon-mail2:		"\e80a";
+$icon-facebook2:	"\e80b";
+$icon-instagram:	"\e80c";
+$icon-twitter:		"\e80d";
+$icon-feed2:		"\e80e";
+$icon-youtube3: 	"\e80f";
+$icon-github4:		"\e810";

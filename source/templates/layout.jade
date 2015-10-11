@@ -3,14 +3,16 @@ html(lang="en")
 	head
 		block headContent
 		title!= title
+		link(href='https://fonts.googleapis.com/css?family=Roboto:400,100,900,700',rel='stylesheet',type='text/css')
 		link(href='/assets/css/main.css', rel='stylesheet')
 		include startup.jade
-	body
 		script(type='text/javascript').
 			var configuration = {
-				startUrl : '',
+				startUrl : "#{configURL}",
 				localKey : 'BuglrPodcast'
 			};
+	body
+
 		include nav.jade
 		block bodyContent
 		include footer.jade

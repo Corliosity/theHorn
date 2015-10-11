@@ -1,3 +1,4 @@
+/* Icon Font Styles */
 /* line 260, ../sass/foundation/components/_global.scss */
 meta.foundation-version {
   font-family: "/5.2.2/";
@@ -55,7 +56,7 @@ html, body {
 /* line 306, ../sass/foundation/components/_global.scss */
 html,
 body {
-  font-size: 100%;
+  font-size: 1rem;
 }
 
 /* line 309, ../sass/foundation/components/_global.scss */
@@ -64,7 +65,7 @@ body {
   color: #222222;
   padding: 0;
   margin: 0;
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-family: Verdana, "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-style: normal;
   line-height: 1;
@@ -1610,7 +1611,7 @@ select {
   color: #222222;
   padding: 1rem;
   display: block;
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-family: Verdana, "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   font-size: 1rem;
 }
 /* line 39, ../sass/foundation/components/_accordion.scss */
@@ -2238,7 +2239,7 @@ button, .button {
   border-style: solid;
   border-width: 0px;
   cursor: pointer;
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-family: Verdana, "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   font-weight: normal;
   line-height: normal;
   margin: 0 0 1.25rem;
@@ -3092,7 +3093,7 @@ dialog[open] {
   padding: 0.875rem 0;
   list-style-type: none;
   list-style-position: inside;
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-family: Verdana, "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 }
 /* line 62, ../sass/foundation/components/_side-nav.scss */
 .side-nav li {
@@ -3112,7 +3113,7 @@ dialog[open] {
 .side-nav li.active > a:first-child:not(.button) {
   color: #1cc7ff;
   font-weight: normal;
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-family: Verdana, "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 }
 /* line 79, ../sass/foundation/components/_side-nav.scss */
 .side-nav li.divider {
@@ -3576,7 +3577,7 @@ meta.foundation-mq-topbar {
   color: white;
   padding: 12px 0 12px 0;
   padding-left: 15px;
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-family: Verdana, "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   font-size: 0.8125rem;
   font-weight: normal;
   text-transform: none;
@@ -4324,14 +4325,14 @@ a img {
 p {
   font-family: inherit;
   font-weight: normal;
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 0.875rem;
+  line-height: 1.2;
   margin-bottom: 1.25rem;
   text-rendering: optimizeLegibility;
 }
 /* line 219, ../sass/foundation/components/_type.scss */
 p.lead {
-  font-size: 1.21875rem;
+  font-size: 1.09375rem;
   line-height: 1.6;
 }
 /* line 221, ../sass/foundation/components/_type.scss */
@@ -4344,7 +4345,7 @@ p aside {
 /* Default header styles */
 /* line 229, ../sass/foundation/components/_type.scss */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-family: "Roboto", "Helvetica", Arial, sans-serif;
   font-weight: normal;
   font-style: normal;
   color: #222222;
@@ -4441,8 +4442,8 @@ code {
 ul,
 ol,
 dl {
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 0.875rem;
+  line-height: 1.2;
   margin-bottom: 1.25rem;
   list-style-position: outside;
   font-family: inherit;
@@ -4560,7 +4561,7 @@ blockquote cite a:visited {
 /* line 389, ../sass/foundation/components/_type.scss */
 blockquote,
 blockquote p {
-  line-height: 1.6;
+  line-height: 1.2;
   color: #6f6f6f;
 }
 
@@ -5118,6 +5119,133 @@ th.hide-for-touch {
   display: table-cell !important;
 }
 
+@font-face {
+  font-family: 'icomoon';
+  src: url("../fonts/icomoon.eot?tn76vi");
+  src: url("../fonts/icomoon.eot?tn76vi#iefix") format("embedded-opentype"), url("../fonts/icomoon.ttf?tn76vi") format("truetype"), url("../fonts/icomoon.woff?tn76vi") format("woff"), url("../fonts/icomoon.svg?tn76vi#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* line 12, ../sass/foundation/components/_icon-fonts.scss */
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* line 26, ../sass/foundation/components/_icon-fonts.scss */
+.icon-home:before {
+  content: "\e600";
+}
+
+/* line 29, ../sass/foundation/components/_icon-fonts.scss */
+.icon-podcast:before {
+  content: "\e800";
+}
+
+/* line 32, ../sass/foundation/components/_icon-fonts.scss */
+.icon-spinner:before {
+  content: "\e601";
+}
+
+/* line 35, ../sass/foundation/components/_icon-fonts.scss */
+.icon-star-empty:before {
+  content: "\e602";
+}
+
+/* line 38, ../sass/foundation/components/_icon-fonts.scss */
+.icon-star-full:before {
+  content: "\e603";
+}
+
+/* line 41, ../sass/foundation/components/_icon-fonts.scss */
+.icon-warning:before {
+  content: "\e801";
+}
+
+/* line 44, ../sass/foundation/components/_icon-fonts.scss */
+.icon-notification:before {
+  content: "\e802";
+}
+
+/* line 47, ../sass/foundation/components/_icon-fonts.scss */
+.icon-info:before {
+  content: "\e803";
+}
+
+/* line 50, ../sass/foundation/components/_icon-fonts.scss */
+.icon-cancel-circle:before {
+  content: "\e804";
+}
+
+/* line 53, ../sass/foundation/components/_icon-fonts.scss */
+.icon-play2:before {
+  content: "\e805";
+}
+
+/* line 56, ../sass/foundation/components/_icon-fonts.scss */
+.icon-pause:before {
+  content: "\e806";
+}
+
+/* line 59, ../sass/foundation/components/_icon-fonts.scss */
+.icon-stop:before {
+  content: "\e807";
+}
+
+/* line 62, ../sass/foundation/components/_icon-fonts.scss */
+.icon-volume-high:before {
+  content: "\e808";
+}
+
+/* line 65, ../sass/foundation/components/_icon-fonts.scss */
+.icon-volume-mute:before {
+  content: "\e809";
+}
+
+/* line 68, ../sass/foundation/components/_icon-fonts.scss */
+.icon-mail2:before {
+  content: "\e80a";
+}
+
+/* line 71, ../sass/foundation/components/_icon-fonts.scss */
+.icon-facebook2:before {
+  content: "\e80b";
+}
+
+/* line 74, ../sass/foundation/components/_icon-fonts.scss */
+.icon-instagram:before {
+  content: "\e80c";
+}
+
+/* line 77, ../sass/foundation/components/_icon-fonts.scss */
+.icon-twitter:before {
+  content: "\e80d";
+}
+
+/* line 80, ../sass/foundation/components/_icon-fonts.scss */
+.icon-feed2:before {
+  content: "\e80e";
+}
+
+/* line 83, ../sass/foundation/components/_icon-fonts.scss */
+.icon-youtube3:before {
+  content: "\e80f";
+}
+
+/* line 86, ../sass/foundation/components/_icon-fonts.scss */
+.icon-github4:before {
+  content: "\e810";
+}
+
 /* General Styling */
 /* line 2, ../sass/_custom.scss */
 .contain-to-grid.footer {
@@ -5125,7 +5253,7 @@ th.hide-for-touch {
   box-sizing: border-box;
   padding-top: 1em;
   width: 100%;
-  background-color: #777;
+  background-color: #333;
   height: 100%;
 }
 
@@ -5153,32 +5281,105 @@ th.hide-for-touch {
 }
 
 /* line 28, ../sass/_custom.scss */
+.margin-15 {
+  margin-top: 0.9375rem;
+  margin-bottom: 0.9375rem;
+}
+
+/* line 32, ../sass/_custom.scss */
+.margin-20 {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+/* line 36, ../sass/_custom.scss */
+.margin-15-bottom {
+  margin-bottom: 0.9375rem;
+}
+
+/* line 39, ../sass/_custom.scss */
 .padding-20 {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
 }
 
+/* line 43, ../sass/_custom.scss */
+.padding-5-sides {
+  padding-right: 0.3125rem;
+  padding-left: 0.3125rem;
+}
+
+/* line 47, ../sass/_custom.scss */
+.padding-10-sides {
+  padding-right: 0.625rem;
+  padding-left: 0.625rem;
+}
+
+/* line 51, ../sass/_custom.scss */
+.padding-15-sides {
+  padding-right: 0.9375rem;
+  padding-left: 0.9375rem;
+}
+
+/* Episode Guide List */
+/* line 58, ../sass/_custom.scss */
+ul.podcast-episode-list {
+  list-style: none;
+}
+/* line 60, ../sass/_custom.scss */
+ul.podcast-episode-list li {
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+/* line 62, ../sass/_custom.scss */
+ul.podcast-episode-list li:last-child {
+  border-bottom: none;
+}
+
+/* Foooter */
+/* line 71, ../sass/_custom.scss */
+.footer ul {
+  list-style: none;
+}
+/* line 73, ../sass/_custom.scss */
+.footer ul li {
+  float: left;
+}
+/* line 76, ../sass/_custom.scss */
+.footer ul .icon:before {
+  font-size: 1.5rem;
+  color: #f2f2f2;
+}
+/* line 80, ../sass/_custom.scss */
+.footer ul .icon.disabled:before {
+  color: #4c4c4c;
+}
+/* line 84, ../sass/_custom.scss */
+.footer .copyright {
+  color: #f2f2f2;
+}
+
 /* Audio Playing style */
-/* line 33, ../sass/_custom.scss */
+/* line 90, ../sass/_custom.scss */
 .player {
   background: #eaeaea;
   border: 1px solid #777;
   height: 3rem;
 }
 
-/* line 38, ../sass/_custom.scss */
+/* line 95, ../sass/_custom.scss */
 .range-slider-handle {
   top: -0.1rem;
   height: 1rem;
   border-radius: 0;
 }
 
-/* line 43, ../sass/_custom.scss */
+/* line 100, ../sass/_custom.scss */
 .range-slider.round .range-slider-handle {
   border-radius: 0;
 }
 
-/* line 46, ../sass/_custom.scss */
+/* line 103, ../sass/_custom.scss */
 .range-slider.round {
   background: #333;
   border-radius: 0;

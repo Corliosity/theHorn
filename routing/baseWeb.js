@@ -8,7 +8,7 @@ router.use(function(req, res, next) {
 });
 
 router.get('/:var(home)?', function(request, response) {
-	response.render('index', { title : 'The Buglr' });	
+	response.render('index', { title : 'The Buglr', configURL : '/assets/js/app/json/episode.json' });	
 });
 
 // router.get('/about', function(request, response){
@@ -20,7 +20,7 @@ router.get('/:var(home)?', function(request, response) {
 // });
 
 router.get('contact', function(request, response) {
-	response.render('contact', { title : 'Contact - The Buglr' });
+	response.render('contact', { title : 'Contact - The Buglr', configURL : '/assets/js/app/json/episode.json' });
 });
 
 module.exports = router;

@@ -2,16 +2,12 @@ Buglr.EpisodeView = Marionette.ItemView.extend({
 
 	template: '#podcast-view',
 
-	ui : {
-		elements : 'li'
-	},
+	tagName: 'li',
+
+	className: 'row padding-10',
 
 	events : {
-		'click @ui.elements' : 'updatePlayer'
-	},
-
-	initialize: function() {
-
+		'click' : 'updatePlayer'
 	},
 
 	updatePlayer : function() {

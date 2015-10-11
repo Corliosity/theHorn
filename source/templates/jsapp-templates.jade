@@ -1,6 +1,6 @@
 //- Will load these templates async in future.  For now to get them working just do it here
 script(type='text/template', id='home-view')
-	div#titleView.contain-to-grid
+	div#titleView.contain-to-grid.margin-15-bottom
 	div.row
 		div.medium-8.columns.right-content#mainRegion
 		div.medium-4.columns#latestPod
@@ -11,17 +11,19 @@ script(type='text/template', id='home-content-view')
 	p This is that podcast.  This is that Group.  This is...really no one is reading this now, go listen, and come back for more.
 
 script(type='text/tmeplate', id='podcast-view')
-		li 
-			div
-				h4 <%- title %>
-				p <%- description %>
+		div.columns.margin-10
+			h4
+				span.icon.icon-podcast.padding-10-sides
+				<%- title %>
+			p <%- description %>
 
 script(type='type/template', id='player-view')
 	h5 <%- title %>
 	p <%- description %>
-	audio(controls)
-		source(src!="<%- source %>", type='audio/mpeg')
-	p Released: <%- released %>
+	div.row
+		audio(controls).columns
+			source(src!="<%- source %>", type='audio/mpeg')
+	small Released: <%- released %>
 
 script(type='text/template', id='title-view')
-	h1(id='title', class='row') <%- title %>
+	h1#title.row.padding-5-sides <%- title %>
