@@ -105,5 +105,30 @@ app.use(function(req, res, next) {
   res.status(404).render('error', { error: req.originalUrl });
 });
 
+app.sendLog = function(logInfo) {
+
+	fs.writeFile(logHTTP, logInfo, {flag : 'a'});
+}
+app.serverFinal = function() {
+
+	var host,
+		port,
+		serverOnStart;
+
+	host = app.get('address');
+	port = app.get('port');
+
+	// Write information to log files
+	// Doing this can give us more information through nodemon without using the console
+	serverOnStart = JSON.stringify({"Host" : host, "Port" : port, "Settings" : appSettings});
+
+	app.sendLog(serverOnStart);
+}
+
+// Create HTTP server
+// TODO : Get certificates to setup as HTTPS server - (if affordable)
+app.server = http.createServer(app);
+app.server.listen(appPort, serverFinal);
+
 // Export the Application Variable as a common JS module in case it needs to be used in other functiosn on the server
 module.exports = app;
