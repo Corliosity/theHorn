@@ -97,8 +97,8 @@ module.exports = function(grunt) {
 				{
 					expand: true,
 					cwd: 'source/',
-					src: ['/fonts/**', '/media/**'],
-					dest: 'dist/source/assets'
+					src: ['fonts/**', 'media/**'],
+					dest: 'dist/source/assets/'
 				},
 				{
 					expand: true,
@@ -157,25 +157,25 @@ module.exports = function(grunt) {
 						{
 							match : /<!--begin startup-->[^<>]*<!--startup end-->/gi,
 							replacement : function() {
-								return 'script(type="text/javascript", src="dist/source/assets/js/concat/startup.min.js")';
+								return 'script(type="text/javascript", src="source/assets/js/concat/startup.min.js")';
 							}
 						},
 						{
 							match : /<!--begin core-->[^<>]*<!--core end-->/gi,
 							replacement : function() {
-								return 'script(type="text/javascript", src="dist/source/assets/js/concat/core.min.js")';
+								return 'script(type="text/javascript", src="source/assets/js/concat/core.min.js")';
 							}		
 						},
 						{
 							match : /<!--begin jsapp-->[^<>]*<!--jsapp end-->/gi,
 							replacement : function() {
-								return 'script(type="text/javascript", src="dist/source/assets/js/concat/jsapp.min.js")';
+								return 'script(type="text/javascript", src="source/assets/js/concat/jsapp.min.js")';
 							}
 						},
 						{
 							match : /<!--cssmain begin-->[^<>]*<!--cssmain end-->/gi,
 							replacement : function() {
-								return 'script(type="text/javascript", src="dist/source/assets/css/main.min.css")';
+								return 'link(rel="stylesheet", src="source/assets/css/main.min.css")';
 							}
 						}
 					]
