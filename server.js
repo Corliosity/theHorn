@@ -38,8 +38,7 @@ app 			= express();
 appSettings		= app.settings;
 multipart		= require('connect-multiparty'); // Helper functions for Audio/Video support
 appPort			= environment.PORT || 8080;
-logFolder       = __dirname + '/logs/server_log.log'; // Declare the location for all log files
-logHTTP			= __dirname + '/logs/status_log.log';
+logFolder       = __dirname + '/server.log'; // Declare the location for all log files
 AWS 			= require('aws-sdk');
 uuid 			= require('node-uuid');
 s3				= new AWS.S3();
@@ -65,7 +64,7 @@ if (appSettings.env !== "production") {
 	app.use(express.static(__dirname + '/source'));
 } else {
 	app.set('views', __dirname + '/source');
-	app.use(express.static(__dirname + '/source'));
+	app.use(express.static(__dirname + '/assets'));
 }
 
 // Setup application to log server requests and write to folder
@@ -112,12 +111,13 @@ app.use(function(req, res, next) {
   res.status(404).render('error', { error: req.originalUrl });
 });
 
-app.sendLog = function(logInfo) {
-
-	fs.writeFile(logHTTP, logInfo, {flag : 'a'});
+var sendLog = function(logInfo) {
+	
+	var logHTTP = '/general_traffic.log';
+	fs.createWriteStream(logHTTP, logInfo, {flag : 'a'});
 };
 
-app.serverFinal = function() {
+serverFinal = function() {
 
 	var host,
 		port,
@@ -130,7 +130,7 @@ app.serverFinal = function() {
 	// Doing this can give us more information through nodemon without using the console
 	serverOnStart = JSON.stringify({"Host" : host, "Port" : port, "Settings" : appSettings});
 
-	app.sendLog(serverOnStart);
+	//sendLog(serverOnStart);
 };
 
 // Create HTTP server
