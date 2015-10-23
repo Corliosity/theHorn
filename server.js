@@ -58,10 +58,11 @@ app.set('view cache', false);
 // Dist is our 'distribution' environment folder
 // TODO : Create Grunt tasks to automate front-end (not creating minimiaztion on server due to possible security issues)
 
-if (appSettings.env !== "production") {
+if (appSettings.env === "production") {
 
 	app.set('views', __dirname + '/source');
 	app.use(express.static(__dirname + '/source'));
+	
 } else {
 	app.set('views', __dirname + '/source');
 	app.use(express.static(__dirname + '/assets'));
