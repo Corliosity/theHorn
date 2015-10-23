@@ -62,10 +62,10 @@ if (appSettings.env === "production") {
 
 	app.set('views', __dirname + '/source');
 	app.use(express.static(__dirname + '/source'));
-	
+
 } else {
 	app.set('views', __dirname + '/source');
-	app.use(express.static(__dirname + '/assets'));
+	app.use(express.static(__dirname + '/source'));
 }
 
 // Setup application to log server requests and write to folder
