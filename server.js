@@ -16,7 +16,10 @@ var express,
 	appPort,
 	logErrors,
 	logHTTP,
-	logStream;
+	logStream,
+	AWS,
+	uuid,
+	s3;
 
 // TODO : Import Bunyan - Modify Morgan for better logging and take out console.log from application
 
@@ -37,6 +40,9 @@ multipart		= require('connect-multiparty'); // Helper functions for Audio/Video 
 appPort			= environment.PORT || 8080;
 logFolder       = __dirname + '/logs/server_log.log'; // Declare the location for all log files
 logHTTP			= __dirname + '/logs/status_log.log';
+AWS 			= require('aws-sdk');
+uuid 			= require('node-uuid');
+s3				= new AWS.S3();
 /**
  * Application Setup
  *
@@ -58,7 +64,8 @@ if (appSettings.env !== "production") {
 	app.set('views', __dirname + '/source');
 	app.use(express.static(__dirname + '/source'));
 } else {
-	app.set('views', __dirname + '/dist');
+	app.set('views', __dirname + '/source');
+	app.use(express.static(__dirname + '/source'));
 }
 
 // Setup application to log server requests and write to folder
@@ -108,7 +115,8 @@ app.use(function(req, res, next) {
 app.sendLog = function(logInfo) {
 
 	fs.writeFile(logHTTP, logInfo, {flag : 'a'});
-}
+};
+
 app.serverFinal = function() {
 
 	var host,
@@ -123,7 +131,7 @@ app.serverFinal = function() {
 	serverOnStart = JSON.stringify({"Host" : host, "Port" : port, "Settings" : appSettings});
 
 	app.sendLog(serverOnStart);
-}
+};
 
 // Create HTTP server
 // TODO : Get certificates to setup as HTTPS server - (if affordable)

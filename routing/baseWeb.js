@@ -19,7 +19,7 @@ router.get('/:var(home)?', function(request, response) {
 // 	response.render('podcast', { title : 'Podcast - The Buglr' });
 // });
 
-router.get('contact', function(request, response) {
+router.get('/contact', function(request, response) {
 	response.render('contact', { title : 'Contact - The Buglr', configURL : '/assets/js/app/json/episode.json' });
 });
 

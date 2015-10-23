@@ -7,4 +7,4 @@ Buglr.addRegions({
 Buglr.appConfig = {
 	startUrl : window.configuration.startUrl,
 	localKey : window.configuration.localKey
-}
+};

@@ -18,4 +18,4 @@ Buglr.TitleView = Marionette.ItemView.extend({
 		
 		this._modelBinder.bind(this.model, this.el, this.bindings);
 	}
-})
+});

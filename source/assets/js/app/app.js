@@ -21,7 +21,7 @@ $(document).ready(function() {
 		})
 		.fail(function() {
 			// show error messaging
-		})
+		});
 
 	Buglr.start();
 });

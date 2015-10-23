@@ -1,11 +1,10 @@
 {
   "name": "thehorn",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A place for Bugle lovers to listen to Fan made podcasts...complete with puns",
   "main": "server.js",
   "scripts": {
-    "test": "mocha",
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -35,7 +34,9 @@
     "connect-multiparty": "~2.0.0",
     "nodeunit": "~0.9.1",
     "mocha": "~2.3.0",
-    "chai": "~3.2.0"
+    "chai": "~3.2.0",
+    "aws-sdk": ">= 2.0.9",
+    "node-uuid": ">= 1.4.1"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
@@ -46,6 +47,11 @@
     "grunt-contrib-cssmin": "~0.13.0",
     "grunt-contrib-jade": "~0.15.0",
     "grunt-contrib-sass": "~0.9.2",
-    "grunt-contrib-watch": "~0.6.1"
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-contrib-copy": "~0.8.1",
+    "grunt-replace": "~0.11.0",
+    "grunt-preprocess": "~5.0.1",
+    "grunt-contrib-clean": "~0.6.0",
+    "grunt-contrib-compress": "~0.13.0"
   }
 }

@@ -4,9 +4,10 @@
 
 #ignore the distribution directory (when exists)
 /dist/
+dist.zip
 
 #ignore any css inside of source
-/source/css/
+/source/assets/css/*
 *.sass-cache/
 #ignore the logging files for git
 *.log

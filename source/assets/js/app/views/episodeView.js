@@ -19,4 +19,4 @@ Buglr.EpisodeView = Marionette.ItemView.extend({
 
 		Buglr.mainView.latestPod.show(newShow);
 	}
-})
+});

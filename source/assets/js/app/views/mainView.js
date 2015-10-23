@@ -23,4 +23,4 @@ Buglr.MainView = Marionette.LayoutView.extend({
 
 		this.latestPod.show(lastEpisode);
 	}
-})
+});
