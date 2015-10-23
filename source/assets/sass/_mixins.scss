@@ -1,0 +1,23 @@
+/* MIXIN FUNCTIONS */
+//  These are classes which can be created as helpers such as padding and adding in the prefixes when necessary
+
+@mixin grid-spaces($size:both) {
+	@for $i from 0 through 16 {
+		$rem: #{($i * 5) / 10 + "rem"};
+		$class: #{$i * 5};
+		$size-class: "";
+		@if ($size != both) {
+			$size-class: #{"-on-"+$size};
+		}
+
+		.padding#{$size-class}-#{$class} {
+			padding-bottom: $rem;
+			padding-top: $rem;
+		}
+
+		.margin#{$size-class}-#{$class} {
+			margin-top: $rem;
+			margin-bottom: $rem;
+		}
+	}
+}

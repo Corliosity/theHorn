@@ -1,14 +1,26 @@
-# The Horn - Because The Bugle was already taken
+# The Bulgr - With Loving Respect to **The Bugle**
 
 ## A community driven project of Bugle lovers
 
-Media, images, and JS will be residing inside of ASSETS folders
+Media, images, and JS will be residing inside of ASSETS folder in SOURCE
 
-Following a revealing JS module pattern
+TODO : Ensure JS will follow a Design Pattern of some sort (Possibly Revealing).
 
-**Built With** : Node.js, Backbone, and Marionette
+**Built With** 
 
-#### Page Updates frequently
+*Server* :
+-   NODE
+-   Express
+- Jade
+
+*Front-End* :
+-   Backbone
+-   Marionette
+- Foundation (SASS)
+
+*Build* :
+- Grunt
 
 All done for the love of **The Bugle**
+
 :metal:

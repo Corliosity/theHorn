@@ -1,0 +1,14 @@
+# Git ignore file to make sure we do not push or have git handle anything it does not need
+# Ignore the modules - these are installed from package.json and command line/terminal
+/node_modules/
+
+#ignore the distribution directory (when exists)
+/dist/
+dist.zip
+
+#ignore any css inside of source
+/source/assets/css/*
+*.sass-cache/
+#ignore the logging files for git
+*.log
+*.DS_Store
