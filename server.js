@@ -53,10 +53,10 @@ app.set('view cache', false);
 // Dist is our 'distribution' environment folder
 // TODO : Create Grunt tasks to automate front-end (not creating minimiaztion on server due to possible security issues)
 
-if (appSettings.env === "production") {
+if (appSettings.env === "development") {
 
 	app.set('views', __dirname + '/source');
-	app.use(express.static(__dirname + '/source'));
+	app.use('/assets', express.static(__dirname + '/source/assets/'));
 
 } else {
 	app.set('views', __dirname + '/source');
@@ -109,8 +109,8 @@ app.use(function(req, res, next) {
 
 var sendLog = function(logInfo) {
 	
-	var logHTTP = '/general_traffic.log';
-	fs.createWriteStream(logHTTP, logInfo, {flag : 'a'});
+	var logHTTP = __dirname + '/general_traffic.log';
+	fs.createWriteStream(logHTTP);
 };
 
 serverFinal = function() {
@@ -126,7 +126,7 @@ serverFinal = function() {
 	// Doing this can give us more information through nodemon without using the console
 	serverOnStart = JSON.stringify({"Host" : host, "Port" : port, "Settings" : appSettings});
 
-	//sendLog(serverOnStart);
+	sendLog(serverOnStart);
 };
 
 // Create HTTP server

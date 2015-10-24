@@ -87,7 +87,8 @@ module.exports = function(grunt) {
 
 		copy : {
 			prod : {
-				files : [{
+				files : [
+				{
 					expand: true,
 					src : '**/*.jade',
 					cwd : 'source/',
@@ -96,9 +97,15 @@ module.exports = function(grunt) {
 				},
 				{
 					expand: true,
-					cwd: 'source/',
-					src: ['fonts/**', 'media/**'],
+					cwd: 'source/assets/',
+					src: ['fonts/**/*', 'media/**/*'],
 					dest: 'dist/source/assets/'
+				},
+				{
+					expand: true,
+					cwd: 'source/assets/js/app/',
+					src: 'json/**/*',
+					dest: 'dist/source/assets/js/app/'
 				},
 				{
 					expand: true,
@@ -169,13 +176,13 @@ module.exports = function(grunt) {
 						{
 							match : /<!--begin jsapp-->[^<>]*<!--jsapp end-->/gi,
 							replacement : function() {
-								return 'script(type="text/javascript", src="source/assets/js/concat/jsapp.min.js")';
+								return 'script(type="text/javascript", src="source/assets/js/concat/jsapp-core.min.js")';
 							}
 						},
 						{
 							match : /<!--cssmain begin-->[^<>]*<!--cssmain end-->/gi,
 							replacement : function() {
-								return 'link(rel="stylesheet", src="source/assets/css/main.min.css")';
+								return 'link(rel="stylesheet", href="source/assets/css/main.min.css")';
 							}
 						}
 					]
