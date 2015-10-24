@@ -244,7 +244,7 @@ module.exports = function(grunt) {
 		'clean:prod',
 		'jshint',
 		'compass:prod',
-		'cssmin',
+		'cssmin:prod',
 		'uglify:prod',
 		'copy',
 		'replace:prod',
