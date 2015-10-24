@@ -10,7 +10,7 @@ Buglr.EpisodeCollection = Backbone.Collection.extend({
 				description: "This is how it begins. Frustrated Bugle listeners upset at the lack of new Bugle's decide to make their own. This is the result.",
 				released: "08/28/2015",
 				duration: "20:35",
-				source : "/assets/media/Episode-1.mp3"
+				source : "./assets/media/Episode-1.mp3"
 			},
 			{
 				id: 2,
@@ -18,7 +18,7 @@ Buglr.EpisodeCollection = Backbone.Collection.extend({
 				description: "All about the drugs",
 				released: "09/12/2015",
 				duration: "",
-				source: "/assets/media/Episode-2.mp3"
+				source: "./assets/media/Episode-2.mp3"
 			},
 			{
 				id: 3,
@@ -26,7 +26,7 @@ Buglr.EpisodeCollection = Backbone.Collection.extend({
 				description: "Just all about the sausages...unfortunately not the kind you eat.",
 				released: "10/12/2015",
 				duration: "",
-				source: "/assets/media/Episode-3.mp3"
+				source: "./assets/media/Episode-3.mp3"
 			}
 		];
 
