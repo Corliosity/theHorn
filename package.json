@@ -4,6 +4,7 @@
   "description": "A place for Bugle lovers to listen to Fan made podcasts...complete with puns",
   "main": "server.js",
   "scripts": {
+    "test" : "echo \"ERROR: No tests were found\" && exit 1",
     "start": "node server.js"
   },
   "repository": {
