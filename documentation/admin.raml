@@ -1,0 +1,56 @@
+#%RAML 0.8
+-----
+title: buglrpodcast API
+baseUri: http://ww.buglrpodcast.com/api/{version}
+
+/admin:
+ get:
+ 	queryParameters:
+ 		id:
+ 			displayName: ID
+ 			type: integer
+ 			description: Admin number
+ 			example: 01
+ 			required: false
+ 		name:
+ 			displayName: Full Name
+ 			type: string
+ 			description: names of the editor / admin
+ 			example: Andrew Corliss
+ 			required: false
+ 		description:
+ 			displayName: Admin Description
+ 			type: string
+ 			description: A synopsis of the episode giving detail to the content.  Also, disclosing the use of any third party media for legal reasons.
+ 			example: Duties
+ 			required: false
+ 		abilities:
+ 			displayName: Ability
+ 			type: array
+ 			description: An array of all the abilities an admin can carry out
+ 			example: ['upload', 'edit', 'add-description']
+ 			required: false
+ 		responses:
+ 			200:
+ 				body:
+ 					application/json:
+ 						example: |
+ 							{
+	 							"data": {
+									"id": "SbBGk",
+									"name": "Andrew Corliss",
+									"description": null,
+									"datetime": 1341533193,
+									"ability": ["edit", "upload"],
+								},
+								"success": true,
+								"status": 200
+		                	}
+ 
+ post:
+ 	queryParameters:
+ 		access_token:
+ 			dispalyName: Access Token
+ 			type: string
+ 			description: Token passed to service in order verify user has permission to add new episode.
+ 			required: true
