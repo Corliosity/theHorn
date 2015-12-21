@@ -4,7 +4,7 @@
   "description": "A place for Bugle lovers to listen to Fan made podcasts...complete with puns",
   "main": "server.js",
   "scripts": {
-    "test" : "echo \"ERROR: No tests were found\" && exit 1",
+    "test": "echo \"ERROR: No tests were found\" && exit 1",
     "start": "node server.js"
   },
   "repository": {
@@ -35,7 +35,8 @@
     "connect-multiparty": "~2.0.0",
     "nodeunit": "~0.9.1",
     "mocha": "~2.3.0",
-    "chai": "~3.2.0"
+    "chai": "~3.2.0",
+    "pg": "~4.4.3"
   },
   "devDependencies": {
     "grunt": "~0.4.5",

@@ -27,5 +27,6 @@ $(document).ready(function() {
 			// show error messaging
 		});
 	*/
+	
 	Buglr.start();
 });
