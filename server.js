@@ -5,6 +5,8 @@ var express,
 	router,
 	admin,
 	adminAPI,
+	adminDB,
+	podcasts,
 	environment,
 	appSettings,
 	fs,
@@ -24,7 +26,8 @@ express 		= require('express'); // Framework to help setup quick NODE applicatio
 http			= require('http'); 	  // Creates HTTP headers and functions
 staticSite		= require('./routing/baseWeb'); // File contains router for our Base web site (Index, Podcast, About)
 admin			= require('./routing/admin');   // File contains router for Admin application
-adminAPI        = require('./routing/api/admin');
+adminAPI        = require('./api/admin');
+podcasts 		= require('./api/podcast');
 environment 	= process.env;		  // Create a global variable to easily call envionrment functions
 fs				= require('fs');      // Filereader module - using for podcast MP3
 path			= require('path');    // Pathing helper funcitons
@@ -34,6 +37,7 @@ bodyParser		= require('body-parser');   // Helps to get data from DOM elements i
 app 			= express();
 appSettings		= app.settings;
 multipart		= require('connect-multiparty'); // Helper functions for Audio/Video support
+pg 				= require('pg');
 appPort			= environment.PORT || 8080;
 logFolder       = __dirname + '/server.log'; // Declare the location for all log files
 
@@ -69,7 +73,7 @@ if (appSettings.env === "development") {
 
 logStream = fs.createWriteStream(logFolder);
 
-app.use(logger('combined', {stream : logStream}));
+app.use(logger('dev', {stream : logStream}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : false }));
 app.use(cookieParser());
@@ -85,10 +89,11 @@ app.use(multipart({}));
  * param1 {object} - What route to handle
  * param2 {object} - Module to use
  */
-
-app.use('/', staticSite);
+app.use('/api/v1/admin', adminAPI);
 app.use('/admin', admin);
-app.use('/api', adminAPI);
+app.use('/api/v1/podcast', podcasts);
+app.use('/', staticSite);
+
 
 /**
  * 404 Error Handler
@@ -99,18 +104,19 @@ app.use('/api', adminAPI);
  */
  app.use(function(err, req, res, next){
   // error page
-  res.status(500).render('error', {error : '500'});
+  res.status(500).render('error', {error : err});
 });
 
 app.use(function(req, res, next) {
   // logic - TODO: Create Error handling here
+  // console.log(req);
   res.status(404).render('error', { error: req.originalUrl });
 });
 
 var sendLog = function(logInfo) {
 	
 	var logHTTP = __dirname + '/general_traffic.log';
-	fs.createWriteStream(logHTTP);
+	//fs.createWriteStream(logHTTP);
 };
 
 serverFinal = function() {
@@ -124,9 +130,9 @@ serverFinal = function() {
 
 	// Write information to log files
 	// Doing this can give us more information through nodemon without using the console
-	serverOnStart = JSON.stringify({"Host" : host, "Port" : port, "Settings" : appSettings});
+	// serverOnStart = JSON.stringify({"Host" : host, "Port" : port, "Settings" : appSettings});
 
-	sendLog(serverOnStart);
+	// sendLog(serverOnStart);
 };
 
 // Create HTTP server
