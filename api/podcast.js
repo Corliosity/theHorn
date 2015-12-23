@@ -1,9 +1,39 @@
 var express = require('express');
 var pg = require('pg');
 var path = require('path');
+var connectionString = require('./config');
+
+// Both JSON and RSS will wind up making a similar call to DB  put into one function
+// That will handle retrieving data from DB
+function getDataFromDB() {
+
+	var query;
+	var results = [];
+
+	var client = new pg.Client(connectionString);
+	client.connect();
+
+	query = client.query('SELECT * FROM episodes ORDER BY id ASC');
+
+	query.on('row', function(row) {
+		results.push(row);
+	});
+
+	query.on('end', function() {
+		client.end();
+
+		return results;
+	});
+};
+
+function noCache() {
+	res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+	res.header('Expires', '-1');
+	res.header('Pragma', 'no-cache');
+}
 
 module.exports = (function() {
-	var connectionString = require('./config');
+	
 	var api = express.Router();
 
 	api.route('/json')
@@ -33,10 +63,9 @@ module.exports = (function() {
 					}
 
 					return res.json(results);
-				})
+				});
 			});
 		})
-
 		.post(function(req, res) {
 
 			var results = [];
@@ -96,10 +125,14 @@ module.exports = (function() {
 					done();
 
 					res.header('Content-Type','text/xml');
+					res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+					res.header('Expires', '-1');
+					res.header('Pragma', 'no-cache');
 
 					return res.render('rss.jade',
 						{
-							episodes:results
+							episodes:results,
+							host: req.headers.hostname
 						});
 				});
 		});

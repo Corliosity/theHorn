@@ -23,6 +23,9 @@ rss(version='2.0', xmlns:itunes='http://www.itunes.com/dtds/podcast-1.0.dtd')
 				itunes:subtitle We make our own podcast so others do not have to
 				itunes:summary= episode.description
 				itunes:image
-				enclosure(url="http://www.buglrpodcast.com/#{episode.episodeuri}",length="20:00",type="audio/mpeg")
+				if host === undefined
+					enclosure(url="http://localhost:8080#{episode.episodeuri}",length="20:00",type="audio/mpeg")
+				else
+					enclosure(url="#{host}#{episode.episodeuri}",length="20:00",type="audio/mpeg")
 				pubDate= new Date(episode.updated).toUTCString()
 				itunes:duration 20:00

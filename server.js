@@ -127,7 +127,6 @@ serverFinal = function() {
 
 	host = app.get('address');
 	port = app.get('port');
-
 	// Write information to log files
 	// Doing this can give us more information through nodemon without using the console
 	// serverOnStart = JSON.stringify({"Host" : host, "Port" : port, "Settings" : appSettings});
