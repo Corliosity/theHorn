@@ -13,7 +13,7 @@ module.exports = (function() {
 		next();
 	});
 
-	api.route('/json')
+	api.route('/json/episodes')
 		.get(function(req, res) {
 
 			db.returnAllRows(function(results) {
@@ -58,8 +58,18 @@ module.exports = (function() {
 
 			});
 		});
+	api.route('/json/episodes/:id')
+		.get(function(req, res) {
 
-	api.route('/rss')
+		})
+		.put(function(req, res) {
+
+		})
+		.delete(function(req,res) {
+
+		});
+
+	api.route('/rss/episodes')
 		.get(function(req, res) {
 			
 

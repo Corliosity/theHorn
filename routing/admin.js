@@ -13,6 +13,6 @@ module.exports = (function() {
 			response.send({name : 'Admin'});
 		});
 
-	return admin
+	return admin;
 
 })();
