@@ -2,6 +2,8 @@ Buglr.EpisodeCollection = Backbone.Collection.extend({
 	
 	model : Buglr.EpisodeModel,
 
+	url: Buglr.appConfig.startUrl,
+
 	initialize: function(models, options) {
 		models = [
 			{
@@ -30,6 +32,6 @@ Buglr.EpisodeCollection = Backbone.Collection.extend({
 			}
 		];
 
-		this.reset(models, {silent: true});
+		//this.reset(models, {silent: true});
 	}
 });

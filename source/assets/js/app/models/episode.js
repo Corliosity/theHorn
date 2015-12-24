@@ -1,1 +1,6 @@
-Buglr.EpisodeModel = Backbone.Model.extend({});
+Buglr.EpisodeModel = Backbone.Model.extend({
+
+	initialize: function() {
+		
+	}
+});

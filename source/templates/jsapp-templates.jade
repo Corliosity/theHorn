@@ -22,8 +22,8 @@ script(type='type/template', id='player-view')
 	p <%- description %>
 	div.row
 		audio(controls).columns
-			source(src!="<%- source %>", type='audio/mpeg')
-	small Released: <%- released %>
+			source(src!="<%- episodeuri %>", type='audio/mpeg')
+	small Released: <%- updated %>
 
 script(type='text/template', id='title-view')
 	h1#title.row.padding-5-sides <%- title %>
