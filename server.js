@@ -1,6 +1,6 @@
 var express,
 	http,
-	serverFinal,
+	app,
 	router,
 	admin,
 	adminAPI,
@@ -13,13 +13,13 @@ var express,
 	cookieParser,
 	bodyParser,
 	multipart,
-	pg,
-	app;
+	pg;
 
 // TODO : Import Bunyan - Modify Morgan for better logging and take out console.log from application
 
 express 		= require('express'); // Framework to help setup quick NODE applications
 http			= require('http'); 	  // Creates HTTP headers and functions
+app 			= express();
 staticSite		= require('./routing/baseWeb'); // File contains router for our Base web site (Index, Podcast, About)
 admin			= require('./routing/admin');   // File contains router for Admin application
 adminAPI        = require('./api/admin');
@@ -33,7 +33,6 @@ bodyParser		= require('body-parser');   // Helps to get data from DOM elements i
 appSettings		= app.settings;
 multipart		= require('connect-multiparty'); // Helper functions for Audio/Video support
 pg 				= require('pg');
-app 			= express();
 
 /**
  * Application Setup

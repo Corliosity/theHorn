@@ -4,6 +4,6 @@ var app = require('../server');
 var http = require('http');
 
 appPort = process.PORT || 3000;
-console.log(app);
+
 app.server = http.createServer(app);
 app.server.listen(appPort);

@@ -8,7 +8,7 @@ router.use(function(req, res, next) {
 });
 
 router.get('/', function(request, response) {
-	response.render('index', { title : 'The Buglr', configURL : '/assets/js/app/json/episode.json' });	
+	response.render('index', { title : 'The Buglr', configURL : '/api/v1/json/episodes' });	
 });
 
 router.get('/contact', function(request, response) {
