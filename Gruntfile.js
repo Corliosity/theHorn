@@ -19,68 +19,16 @@ module.exports = function(grunt) {
 		uglify : {
 			dev : {
 				files : {
-					'source/assets/js/concat/startup.min.js' : [
-						'source/assets/js/lib/jquery/2.1.4/jquery.js',
-						'source/assets/js/lib/modernizr/modernizr.js',
-						'source/assets/js/lib/fastclick/fastclick.js',
-						'source/assets/js/lib/jquery.cookie/jquery.cookie.js',
-						'source/assets/js/lib/underscore/1.8.3/underscore.js'
-					],
-					'source/assets/js/concat/core.min.js' : [
-						'source/assets/js/lib/foundation/foundation.min.js',
-						'source/assets/js/lib/foundation/foundation5/foundation.topbar.js',
-						'source/assets/js/lib/backbone/1.2.3/backbone.js',
-						'source/assets/js/lib/backbone.marionette/2.4.3/backbone.marionette.min.js',
-						'source/assets/js/lib/backbone/backbone.modelbinder/1.1.0/backbone.modelbinder.js'
-					],
-					'source/assets/js/concat/jsapp-core.min.js' : [
-						'source/assets/js/app/app-config.js',
-						'source/assets/js/app/views/mainView.js',
-						'source/assets/js/app/views/titleView.js',
-						'source/assets/js/app/views/homeView.js',
-						'source/assets/js/app/views/player.js',
-						'source/assets/js/app/views/episodeView.js',
-						'source/assets/js/app/views/episodesList.js',
-						'source/assets/js/app/models/applicationState.js',
-						'source/assets/js/app/models/episode.js',
-						'source/assets/js/app/collections/episodes.js',
-						'source/assets/js/app/controller.js',
-						'source/assets/js/app/router.js',
-						'source/assets/js/app/app.js'
-					]
+					'source/assets/js/concat/startup.min.js' : ['source/tmp/concat/startup.js'],
+					'source/assets/js/concat/core.min.js' : ['source/tmp/concat/core.js'],
+					'source/assets/js/concat/jsapp-core.min.js' : ['source/tmp/concat/jsapp-core.js']
 				}
 			},
 			prod : {
 				files : {
-					'dist/source/assets/js/concat/startup.min.js' : [
-						'source/assets/js/lib/jquery/2.1.4/jquery.js',
-						'source/assets/js/lib/modernizr/modernizr.js',
-						'source/assets/js/lib/fastclick/fastclick.js',
-						'source/assets/js/lib/jquery.cookie/jquery.cookie.js',
-						'source/assets/js/lib/underscore/1.8.3/underscore.js'
-					],
-					'dist/source/assets/js/concat/core.min.js' : [
-						'source/assets/js/lib/foundation/foundation.min.js',
-						'source/assets/js/lib/foundation/foundation5/foundation.topbar.js',
-						'source/assets/js/lib/backbone/1.2.3/backbone.js',
-						'source/assets/js/lib/backbone.marionette/2.4.3/backbone.marionette.min.js',
-						'source/assets/js/lib/backbone/backbone.modelbinder/1.1.0/backbone.modelbinder.js'
-					],
-					'dist/source/assets/js/concat/jsapp-core.min.js' : [
-						'source/assets/js/app/app-config.js',
-						'source/assets/js/app/views/mainView.js',
-						'source/assets/js/app/views/titleView.js',
-						'source/assets/js/app/views/homeView.js',
-						'source/assets/js/app/views/player.js',
-						'source/assets/js/app/views/episodeView.js',
-						'source/assets/js/app/views/episodesList.js',
-						'source/assets/js/app/models/applicationState.js',
-						'source/assets/js/app/models/episode.js',
-						'source/assets/js/app/collections/episodes.js',
-						'source/assets/js/app/controller.js',
-						'source/assets/js/app/router.js',
-						'source/assets/js/app/app.js'
-					]
+					'dist/source/assets/js/concat/startup.min.js' : ['source/tmp/concat/startup.js'],
+					'dist/source/assets/js/concat/core.min.js' : ['source/tmp/concat/core.js'],
+					'dist/source/assets/js/concat/jsapp-core.min.js' : ['source/tmp/concat/jsapp-core.js']
 				}
 			}
 		},
@@ -114,6 +62,8 @@ module.exports = function(grunt) {
 				}]
 			}
 		},
+
+		concat: {},
 
 		compress: {
 			prod : {
@@ -213,7 +163,10 @@ module.exports = function(grunt) {
 
 		clean : {
 			prod : {
-				src : ['dist/', 'dist.zip']
+				src : ['dist/', 'dist.zip', 'source/tmp/']
+			},
+			dev : {
+				src : ['source/tmp/']
 			}
 		},
 
@@ -250,5 +203,77 @@ module.exports = function(grunt) {
 		'replace:prod',
 		'compress:prod'
 		]);
+
+	grunt.registerTask('testing',[
+		'jshint',
+		'getFilesForConcat',
+		'concat',
+		'uglify:dev',
+		'clean:dev'
+		]);
+
+	grunt.registerTask('getFilesForConcat', 'Dynamically Grab Files for Concat', function() {
+			// Return configs
+			var prefix = '/assets/js/';
+			var targetPath = 'source/assets/js';
+
+			var parseIncludesFileAndCreateGroups = function(includeFile) {
+				var data = parseData(grunt.file.read('source/templates/concat/' + includeFile));
+
+				return data;
+			};
+
+			var parseData = function(data) {
+
+				var cleanData = data.replace(/(\n|\r)/g, '');
+				var hash = [];
+
+				// Just match a script tag with the attribute build-into
+				var matches = cleanData.match(/(script\(type=\'[^\'']*\',\ssrc=\'[^\'']*'\))/g);
+
+				if (matches) {
+					for (var i = 0; i < matches.length; i++) {
+						
+						var scriptTag = matches[i];
+						
+						var srcMatch = scriptTag.match(/src=\'([^\'']*)\'/);
+
+						if (!srcMatch)
+							continue;
+						
+						var src = srcMatch[1];
+						var offset = src.indexOf(prefix) + prefix.length;
+						
+						hash.push(targetPath + '/' + src.substring(offset));
+
+					}
+				}
+				return hash;
+			};
+
+			grunt.file.expand('source/templates/concat/*').forEach(function(includeFileWithPath) {
+
+				var concat = grunt.config.get('concat') || {};
+				var copy = grunt.config.get('copy') || {};
+
+				var tmp = includeFileWithPath.split('concat/');
+				var jadeFile = tmp[1];
+				tmp = jadeFile.split('.jade');
+				var fileName = tmp[0];
+
+				var concatList = parseIncludesFileAndCreateGroups(jadeFile);
+				
+				concat[fileName] = {
+					src: [concatList],
+					dest: 'source/tmp/concat/' + fileName + '.js'
+				};
+
+				grunt.config.set('concat', concat);
+
+			});
+
+			grunt.log.writeln('********************** Dynamic Concat of JS files ********************************');
+
+		});
 
 };

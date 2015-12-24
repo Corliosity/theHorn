@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"ERROR: No tests were found\" && exit 1",
-    "start": "node server.js"
+    "start": "node ./bin/www"
   },
   "repository": {
     "type": "git",
