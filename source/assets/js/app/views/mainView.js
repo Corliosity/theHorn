@@ -16,11 +16,5 @@ Buglr.MainView = Marionette.LayoutView.extend({
 		});
 
 		this.titleView.show(title);
-
-		var lastEpisode = new Buglr.EpisodePlayer({
-			model: Buglr.episodes.last()
-		});
-
-		this.latestPod.show(lastEpisode);
 	}
 });

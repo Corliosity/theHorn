@@ -11,14 +11,18 @@ $(document).ready(function() {
 	Buglr.mainView = new Buglr.MainView();
 	Buglr.episodes = new Buglr.EpisodeCollection();
 	
-	
+	Buglr.appRegion.show(Buglr.mainView);
 	
 	// We are initializing the applicaiton from hardcode data
 	// When services are up move logic back into the done functions
 	Buglr.episodes.fetch()
 		.done(function() {
-			Buglr.appRegion.show(Buglr.mainView);
 			
+			var lastEpisode = new Buglr.EpisodePlayer({
+				model: Buglr.episodes.last()
+			});
+
+			Buglr.mainView.latestPod.show(lastEpisode);
 		})
 		.fail(function() {
 			// show error messaging
