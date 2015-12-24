@@ -1,11 +1,9 @@
 var express,
-	app,
 	http,
 	serverFinal,
 	router,
 	admin,
 	adminAPI,
-	adminDB,
 	podcasts,
 	environment,
 	appSettings,
@@ -15,10 +13,8 @@ var express,
 	cookieParser,
 	bodyParser,
 	multipart,
-	appPort,
-	logErrors,
-	logHTTP,
-	logStream;
+	pg,
+	app;
 
 // TODO : Import Bunyan - Modify Morgan for better logging and take out console.log from application
 
@@ -34,12 +30,10 @@ path			= require('path');    // Pathing helper funcitons
 logger			= require('morgan');  // Logging to the console - > need to make sure this can save information to file on server
 cookieParser	= require('cookie-parser'); // Cookie creation, parsing, and reading helper functions
 bodyParser		= require('body-parser');   // Helps to get data from DOM elements in POST requests.
-app 			= express();
 appSettings		= app.settings;
 multipart		= require('connect-multiparty'); // Helper functions for Audio/Video support
 pg 				= require('pg');
-appPort			= environment.PORT || 8080;
-logFolder       = __dirname + '/server.log'; // Declare the location for all log files
+app 			= express();
 
 /**
  * Application Setup
@@ -70,10 +64,7 @@ if (appSettings.env === "development") {
 // Setup application to log server requests and write to folder
 // Call Body Parser helper funcitons to read in POST data (User Logins)
 // Setup Cookies, and Audio helper functions
-
-logStream = fs.createWriteStream(logFolder);
-
-app.use(logger('dev', {stream : logStream}));
+app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : false }));
 app.use(cookieParser());
@@ -91,7 +82,7 @@ app.use(multipart({}));
  */
 app.use('/api/v1/admin', adminAPI);
 app.use('/admin', admin);
-app.use('/api/v1/podcast', podcasts);
+app.use('/api/v1/', podcasts);
 app.use('/', staticSite);
 
 
@@ -113,31 +104,6 @@ app.use(function(req, res, next) {
   res.status(404).render('error', { error: req.originalUrl });
 });
 
-var sendLog = function(logInfo) {
-	
-	var logHTTP = __dirname + '/general_traffic.log';
-	//fs.createWriteStream(logHTTP);
-};
-
-serverFinal = function() {
-
-	var host,
-		port,
-		serverOnStart;
-
-	host = app.get('address');
-	port = app.get('port');
-	// Write information to log files
-	// Doing this can give us more information through nodemon without using the console
-	// serverOnStart = JSON.stringify({"Host" : host, "Port" : port, "Settings" : appSettings});
-
-	// sendLog(serverOnStart);
-};
-
-// Create HTTP server
-// TODO : Get certificates to setup as HTTPS server - (if affordable)
-app.server = http.createServer(app);
-app.server.listen(appPort, serverFinal);
 
 // Export the Application Variable as a common JS module in case it needs to be used in other functiosn on the server
 module.exports = app;
