@@ -7,6 +7,8 @@ module.exports = function(grunt) {
 
 		pkg: grunt.file.readJSON('package.json'),
 
+		config: grunt.file.readJSON('grunt_config.json'),
+
 		jshint: {
 			files : ['Gruntfile.js', 'server.js', 'routing/**/*.js', 'source/assets/js/app/**/*.js', 'package.json'],
 			options : {
@@ -19,16 +21,16 @@ module.exports = function(grunt) {
 		uglify : {
 			dev : {
 				files : {
-					'source/assets/js/concat/startup.min.js' : ['source/tmp/concat/startup.js'],
-					'source/assets/js/concat/core.min.js' : ['source/tmp/concat/core.js'],
-					'source/assets/js/concat/jsapp-core.min.js' : ['source/tmp/concat/jsapp-core.js']
+					'<%= config.source_files.javascript %>/startup.min.js' : ['source/tmp/concat/startup.js'],
+					'<%= config.source_files.javascript %>/core.min.js' : ['source/tmp/concat/core.js'],
+					'<%= config.source_files.javascript %>/jsapp-core.min.js' : ['source/tmp/concat/jsapp-core.js']
 				}
 			},
 			prod : {
 				files : {
-					'dist/source/assets/js/concat/startup.min.js' : ['source/tmp/concat/startup.js'],
-					'dist/source/assets/js/concat/core.min.js' : ['source/tmp/concat/core.js'],
-					'dist/source/assets/js/concat/jsapp-core.min.js' : ['source/tmp/concat/jsapp-core.js']
+					'<%= config.dest_files.javascript %>/startup.min.js' : ['source/tmp/concat/startup.js'],
+					'<%= config.dest_files.javascript %>/core.min.js' : ['source/tmp/concat/core.js'],
+					'<%= config.dest_files.javascript %>/jsapp-core.min.js' : ['source/tmp/concat/jsapp-core.js']
 				}
 			}
 		},
@@ -114,19 +116,19 @@ module.exports = function(grunt) {
 						{
 							match : /<!--begin startup-->[^<>]*<!--startup end-->/gi,
 							replacement : function() {
-								return 'script(type="text/javascript", src="source/assets/js/concat/startup.min.js")';
+								return 'script(type="text/javascript", src="<%= config.source_files.javascript %>/startup.min.js")';
 							}
 						},
 						{
 							match : /<!--begin core-->[^<>]*<!--core end-->/gi,
 							replacement : function() {
-								return 'script(type="text/javascript", src="source/assets/js/concat/core.min.js")';
+								return 'script(type="text/javascript", src="<%= config.source_files.javascript %>/core.min.js")';
 							}		
 						},
 						{
 							match : /<!--begin jsapp-->[^<>]*<!--jsapp end-->/gi,
 							replacement : function() {
-								return 'script(type="text/javascript", src="source/assets/js/concat/jsapp-core.min.js")';
+								return 'script(type="text/javascript", src="<%= config.source_files.javascript %>/jsapp-core.min.js")';
 							}
 						},
 						{
@@ -196,9 +198,11 @@ module.exports = function(grunt) {
 		[
 		'clean:prod',
 		'jshint',
+		'getFilesForConcat',
+		'concat',
+		'uglify:prod',
 		'compass:prod',
 		'cssmin:prod',
-		'uglify:prod',
 		'copy',
 		'replace:prod',
 		'compress:prod'
@@ -254,7 +258,6 @@ module.exports = function(grunt) {
 			grunt.file.expand('source/templates/concat/*').forEach(function(includeFileWithPath) {
 
 				var concat = grunt.config.get('concat') || {};
-				var copy = grunt.config.get('copy') || {};
 
 				var tmp = includeFileWithPath.split('concat/');
 				var jadeFile = tmp[1];
@@ -271,8 +274,6 @@ module.exports = function(grunt) {
 				grunt.config.set('concat', concat);
 
 			});
-
-			grunt.log.writeln('********************** Dynamic Concat of JS files ********************************');
 
 		});
 

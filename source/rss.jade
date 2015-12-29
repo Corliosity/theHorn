@@ -26,6 +26,6 @@ rss(version='2.0', xmlns:itunes='http://www.itunes.com/dtds/podcast-1.0.dtd')
 				if host === undefined
 					enclosure(url="http://localhost:8080#{episode.episodeuri}",length="20:00",type="audio/mpeg")
 				else
-					enclosure(url="#{host}#{episode.episodeuri}",length="20:00",type="audio/mpeg")
+					enclosure(url="#{host}#{episode.episodeuri}",length="#{episode.duration}",type="audio/mpeg")
 				pubDate= new Date(episode.updated).toUTCString()
 				itunes:duration 20:00
