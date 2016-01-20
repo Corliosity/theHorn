@@ -116,25 +116,25 @@ module.exports = function(grunt) {
 						{
 							match : /<!--begin startup-->[^<>]*<!--startup end-->/gi,
 							replacement : function() {
-								return 'script(type="text/javascript", src="source/assets/js/concat/startup.min.js")';
+								return 'script(type="text/javascript", src="assets/js/concat/startup.min.js")';
 							}
 						},
 						{
 							match : /<!--begin core-->[^<>]*<!--core end-->/gi,
 							replacement : function() {
-								return 'script(type="text/javascript", src="source/assets/js/concat/core.min.js")';
+								return 'script(type="text/javascript", src="assets/js/concat/core.min.js")';
 							}		
 						},
 						{
 							match : /<!--begin jsapp-->[^<>]*<!--jsapp end-->/gi,
 							replacement : function() {
-								return 'script(type="text/javascript", src="source/assets/js/concat/jsapp-core.min.js")';
+								return 'script(type="text/javascript", src="assets/js/concat/jsapp-core.min.js")';
 							}
 						},
 						{
 							match : /<!--cssmain begin-->[^<>]*<!--cssmain end-->/gi,
 							replacement : function() {
-								return 'link(rel="stylesheet", href="source/assets/css/main.min.css")';
+								return 'link(rel="stylesheet", href="assets/css/main.min.css")';
 							}
 						}
 					]
@@ -164,8 +164,11 @@ module.exports = function(grunt) {
 		},
 
 		clean : {
+			beforeProd : {
+				src : ['dist/', 'dist.zip']
+			},
 			prod : {
-				src : ['dist/', 'dist.zip', 'source/tmp/*.js', 'source/assets/js/concat/']
+				src : ['source/tmp/', 'source/assets/js/concat/']
 			},
 			dev : {
 				src : ['source/tmp/']
@@ -196,7 +199,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('build',
 		[
-		'clean:prod',
+		'clean:beforeProd',
 		'jshint',
 		'getFilesForConcat',
 		'concat',
@@ -205,7 +208,8 @@ module.exports = function(grunt) {
 		'cssmin:prod',
 		'copy',
 		'replace:prod',
-		'compress:prod'
+		'compress:prod',
+		'clean:prod'
 		]);
 
 	grunt.registerTask('testing',[

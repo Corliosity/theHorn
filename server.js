@@ -57,7 +57,7 @@ if (appSettings.env === "development") {
 
 } else {
 	app.set('views', __dirname + '/source');
-	app.use('/source', express.static(__dirname + '/source'));
+	app.use('/assets', express.static(__dirname + '/source/assets/'));
 }
 
 // Setup application to log server requests and write to folder
