@@ -5,7 +5,6 @@
     padding-top: 1em;
     width: 100%;
     background-color: #333;
-    height: 100%;
 }
 
 #appRegion {
@@ -87,6 +86,20 @@ ul.podcast-episode-list {
 	}
 	.copyright {
 		color: #f2f2f2;
+	}
+
+}
+.recent-episode {
+	background-color: #f2f2f2;
+	opacity: 0.8;
+}
+
+#latestPod {
+	position: relative;
+	#play-holder {
+		position: fixed;
+		z-index: 5;
+		margin-right: 0.75rem;
 	}
 }
 

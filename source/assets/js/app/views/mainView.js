@@ -5,7 +5,8 @@ Buglr.MainView = Marionette.LayoutView.extend({
 	regions: {
 		latestPod : '#latestPod',
 		titleView : '#titleView',
-		mainRegion: '#mainRegion'
+		mainRegion: '#mainRegion',
+		episodeRegion: '#episodeRegion'
 	},
 
 	onDomRefresh: function() {

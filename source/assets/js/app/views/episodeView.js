@@ -4,7 +4,7 @@ Buglr.EpisodeView = Marionette.ItemView.extend({
 
 	tagName: 'li',
 
-	className: 'row padding-10',
+	className: 'medium-7 columns end',
 
 	events : {
 		'click' : 'updatePlayer'

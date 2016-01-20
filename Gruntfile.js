@@ -165,7 +165,7 @@ module.exports = function(grunt) {
 
 		clean : {
 			beforeProd : {
-				src : ['dist/', 'dist.zip']
+				src : ['dist/', 'dist.zip', 'source/assets/css/*.css']
 			},
 			prod : {
 				src : ['source/tmp/', 'source/assets/js/concat/']
