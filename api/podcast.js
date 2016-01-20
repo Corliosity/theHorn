@@ -25,7 +25,7 @@ module.exports = (function() {
 
 			var results = [];
 
-			var url = '/_assets/media/' + req.body.epName;
+			var url = '/assets/media/' + req.body.epName;
 
 			var data = {
 				title : req.body.epTitle,

@@ -8,11 +8,11 @@ router.use(function(req, res, next) {
 });
 
 router.get('/', function(request, response) {
-	response.render('index', { title : 'The Buglr', configURL : '/api/v1/json/episodes' });	
+	response.render('index', { title : 'The Buglr', configURL : '/api/v1/json/episodes', nodeEnv: 'production' });	
 });
 
 router.get('/contact', function(request, response) {
-	response.render('contact', { title : 'Contact - The Buglr', configURL : '/assets/js/app/json/episode.json' });
+	response.render('contact', { title : 'Contact - The Buglr', configURL : '/assets/js/app/json/episode.json', nodeEnv: process.env.NODE_ENV });
 });
 
 module.exports = router;

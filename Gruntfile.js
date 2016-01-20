@@ -59,7 +59,7 @@ module.exports = function(grunt) {
 				},
 				{
 					expand: true,
-					src: ['server.js', 'package.json', 'Gruntfile.js', 'routing/**/*.js'],
+					src: ['server.js', 'package.json', 'Gruntfile.js', 'routing/**/*.js', 'api/**/*.js', 'db/**/*.js', 'bin/**'],
 					dest: 'dist/'
 				}]
 			}
@@ -74,7 +74,7 @@ module.exports = function(grunt) {
 					mode: 'zip'
 				},
 				files : [{
-					src : './dist/**'
+					src : ['dist/api/**/*.js', 'dist/bin/www', 'dist/db/**/*.js', 'dist/routing/**/*.js', 'dist/source/**', 'dist/Gruntfile.js', 'dist/package.json', 'dist/server.js']
 				}]
 			}
 		},
@@ -116,19 +116,19 @@ module.exports = function(grunt) {
 						{
 							match : /<!--begin startup-->[^<>]*<!--startup end-->/gi,
 							replacement : function() {
-								return 'script(type="text/javascript", src="<%= config.source_files.javascript %>/startup.min.js")';
+								return 'script(type="text/javascript", src="source/assets/js/concat/startup.min.js")';
 							}
 						},
 						{
 							match : /<!--begin core-->[^<>]*<!--core end-->/gi,
 							replacement : function() {
-								return 'script(type="text/javascript", src="<%= config.source_files.javascript %>/core.min.js")';
+								return 'script(type="text/javascript", src="source/assets/js/concat/core.min.js")';
 							}		
 						},
 						{
 							match : /<!--begin jsapp-->[^<>]*<!--jsapp end-->/gi,
 							replacement : function() {
-								return 'script(type="text/javascript", src="<%= config.source_files.javascript %>/jsapp-core.min.js")';
+								return 'script(type="text/javascript", src="source/assets/js/concat/jsapp-core.min.js")';
 							}
 						},
 						{
@@ -142,7 +142,7 @@ module.exports = function(grunt) {
 				files : [{
 					expand : true,
 					cwd : 'dist/source/',
-					src: ['templates/*.jade'],
+					src: ['templates/**/*.jade'],
 					dest: 'dist/source/'					
 				}]
 			}
@@ -165,7 +165,7 @@ module.exports = function(grunt) {
 
 		clean : {
 			prod : {
-				src : ['dist/', 'dist.zip', 'source/tmp/']
+				src : ['dist/', 'dist.zip', 'source/tmp/*.js', 'source/assets/js/concat/']
 			},
 			dev : {
 				src : ['source/tmp/']

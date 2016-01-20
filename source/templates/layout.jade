@@ -11,7 +11,8 @@ html(lang="en")
 		script(type='text/javascript').
 			var configuration = {
 				startUrl : "#{configURL}",
-				localKey : 'BuglrPodcast'
+				localKey : "BuglrPodcast",
+				env : "#{nodeEnv}"
 			};
 	body
 		include nav.jade
