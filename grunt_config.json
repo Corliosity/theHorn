@@ -1,0 +1,15 @@
+{
+	"javascript" : {
+		"startup" : "source/tmp/concat/startup.js",
+		"jsapp" : "source/tmp/concat/jsapp-core.js",
+		"core" : "source/tmp/concat/core.js"
+	},
+	"source_files": {
+		"javascript" : "source/assets/js/concat",
+		"css": "source/assets/css"
+	},
+	"dest_files" : {
+		"javascript" : "dist/source/assets/js/concat",
+		"css" : "dist/source/assets/css"
+	}
+}

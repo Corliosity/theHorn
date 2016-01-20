@@ -1,0 +1,31 @@
+doctype xml
+rss(version='2.0', xmlns:itunes='http://www.itunes.com/dtds/podcast-1.0.dtd')
+	channel
+		title The Buglr
+		link <a href="https://www.buglrpodcast.com/api/v1/podcast/rss" rel="nofollow">http://www.buglrpodcast.com</a>
+		description A collection of Bugle fans who wanted more Bugle...so we rolled our own podcast and website.
+		copyright Andrew Corliss 2015
+		itunes:subtitle A grab and mix of everything
+		itunes:summary A collection of Bugle fans who wanted more Bugle...so we rolled our own podcast and website.
+		itunes:owner
+			itunes:name Andrew Corliss
+			itunes:email andrew.corliss@gmail.com
+		itunes:image
+		itunes:category(text="Society &amp; Culture")
+		itunes:category(text="Political")
+		language en-US
+		if episodes.length
+			lastBuildDate= new Date(episodes[0].updated).toUTCString()
+		each episode in episodes
+			item
+				title= episode.title
+				itunes:author The Buglr
+				itunes:subtitle We make our own podcast so others do not have to
+				itunes:summary= episode.description
+				itunes:image
+				if host === undefined
+					enclosure(url="http://localhost:8080#{episode.episodeuri}",length="20:00",type="audio/mpeg")
+				else
+					enclosure(url="#{host}#{episode.episodeuri}",length="#{episode.duration}",type="audio/mpeg")
+				pubDate= new Date(episode.updated).toUTCString()
+				itunes:duration 20:00

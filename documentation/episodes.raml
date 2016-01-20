@@ -1,0 +1,62 @@
+#%RAML 0.8
+-----
+title: buglrpodcast API
+baseUri: http://ww.buglrpodcast.com/api/{version}
+
+/episodes:
+ get:
+ 	queryParameters:
+ 		id:
+ 			displayName: ID
+ 			type: integer
+ 			description: Episode number
+ 			example: 01
+ 			required: false
+ 		episodeTitle:
+ 			displayName: Episode Name
+ 			type: string
+ 			description: A two to three word title for the Episode
+ 			example: The Drug Episode
+ 			required: false
+ 		episodeUri:
+ 			displayName: episode uri
+ 			type: string
+ 			description: The URI that will be use to retrieve the mp3 media component to be played.
+ 			example: http://www.buglrpodcast.com/media/episodes/1.mp3
+ 			required: false
+ 		description:
+ 			displayName: Episode Description
+ 			type: string
+ 			description: A synopsis of the episode giving detail to the content.  Also, disclosing the use of any third party media for legal reasons.
+ 			example: The Drug Episode example description content.
+ 			required: false
+ 		responses:
+ 			200:
+ 				body:
+ 					application/json:
+ 						example: |
+ 							{
+	 							"data": {
+									"id": "SbBGk",
+									"title": "Stiff: The Curious Lives of Human Cadavers",
+									"description": null,
+									"datetime": 1341533193,
+									"genre": "science",
+									"author": "Mary Roach",
+									"link": "http://e-bookmobile.com/books/Stiff",
+								},
+								"success": true,
+								"status": 200
+		                	}
+ 
+ post:
+ 	queryParameters:
+ 		access_token:
+ 			dispalyName: Access Token
+ 			type: string
+ 			description: Token passed to service in order verify user has permission to add new episode.
+ 			required: true
+ delete:
+ /{id}:
+ 	get:
+ 	delete:

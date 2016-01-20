@@ -18,12 +18,13 @@ script(type='text/tmeplate', id='podcast-view')
 			p <%- description %>
 
 script(type='type/template', id='player-view')
+	<% var myDate = new Date(updated).toUTCString(); %>
 	h5 <%- title %>
 	p <%- description %>
 	div.row
 		audio(controls).columns
-			source(src!="<%- source %>", type='audio/mpeg')
-	small Released: <%- released %>
+			source(src!="<%- episodeuri %>", type='audio/mpeg')
+	small Released: <%- myDate %>
 
 script(type='text/template', id='title-view')
 	h1#title.row.padding-5-sides <%- title %>

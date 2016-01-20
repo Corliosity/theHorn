@@ -7,11 +7,12 @@ html(lang="en")
 		<!--cssmain begin-->
 		link(href='/assets/css/main.css', rel='stylesheet')
 		<!--cssmain end-->
-		include startup.jade
+		include ./concat/startup.jade
 		script(type='text/javascript').
 			var configuration = {
 				startUrl : "#{configURL}",
-				localKey : 'BuglrPodcast'
+				localKey : "BuglrPodcast",
+				env : "#{nodeEnv}"
 			};
 	body
 		include nav.jade
