@@ -1,6 +1,7 @@
 Buglr.EpisodePlayer = Marionette.ItemView.extend({
 	
 	template: '#player-view',
+	id: 'play-holder',
 
 	initialize: function(option) {
 		var episode;

@@ -4,13 +4,18 @@ Buglr.Controller = {
 
 		// Main View Boot goes here
 		var view,
-			title;
+			title,
+			epList;
 
 		view = new Buglr.HomeView();
+		epList = new Buglr.EpisodesView({
+			collection: Buglr.episodes
+		});
 
 		Buglr.applicationState.set('title', 'The Buglr Home');
 
 		Buglr.mainView.mainRegion.show(view);
+		Buglr.mainView.episodeRegion.show(epList);
 	},
 
 	podcastPlay: function() {
@@ -18,6 +23,7 @@ Buglr.Controller = {
 			title;
 
 		Buglr.mainView.mainRegion.reset();
+		Buglr.mainView.episodeRegion.reset();
 		Buglr.applicationState.set('title', 'Buglr Podcast');
 
 		view = new Buglr.EpisodesView({
