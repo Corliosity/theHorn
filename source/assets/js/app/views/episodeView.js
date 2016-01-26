@@ -4,13 +4,14 @@ Buglr.EpisodeView = Marionette.ItemView.extend({
 
 	tagName: 'li',
 
-	className: 'medium-7 columns end',
+	className: 'medium-12 columns end',
 
 	events : {
 		'click' : 'updatePlayer'
 	},
 
 	updatePlayer : function() {
+
 		Buglr.mainView.latestPod.reset();
 
 		var newShow = new Buglr.EpisodePlayer({

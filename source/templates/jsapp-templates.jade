@@ -4,14 +4,17 @@ script(type='text/template', id='home-view')
 	div.row
 		div.medium-7.columns.right-content#mainRegion
 		div.medium-5.columns#latestPod
-	div.row.recent-episode
-		h3 Recent Episodes
-		#episodeRegion
+	div.contain-to-grid.recent-episode.margin-10
+		#episodeRegion.row
 
 script(type='text/template', id='home-content-view')
 	h2 Brief Description
 	p In the year of 2015 without the guidance of Bugle Overloads on a consisten basis a small group banded together and created their own podcase
 	p This is that podcast.  This is that Group.  This is...really no one is reading this now, go listen, and come back for more.
+
+script(type='text/template', id='list-layout')
+	h3.padding-20 Recent Episodes
+	ul.podcast-episode-list
 
 script(type='text/tmeplate', id='podcast-view')
 		div.columns.margin-10

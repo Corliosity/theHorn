@@ -1,24 +1,32 @@
 /* General Styling */
-.contain-to-grid.footer {
-    display: block;
-    box-sizing: border-box;
-    padding-top: 1em;
-    width: 100%;
-    background-color: #333;
+.wrapper {
+	position: relative;
+	min-height:100%;
+}
+
+.footer {
+	background-color: #333;
+	padding: 1rem;
 }
 
 #appRegion {
-	height: 80%;
+	min-height: 90%;
 	.right-content {
 		border-right: 1px solid #ccc;
 		height: 100%;
 		margin-top: rem-calc(5);
 	}
 }
+.podcast-episode-list{
+	p {
+		margin:0;
+	}
+}
 
 .title-row {
 	width: 100%;
 	background: #eaeaea;
+	margin-top: -1em;
 }
 .margin-10 {
 	margin-top: rem-calc(10);
@@ -92,15 +100,7 @@ ul.podcast-episode-list {
 .recent-episode {
 	background-color: #f2f2f2;
 	opacity: 0.8;
-}
-
-#latestPod {
-	position: relative;
-	#play-holder {
-		position: fixed;
-		z-index: 5;
-		margin-right: 0.75rem;
-	}
+	max-width: none;
 }
 
 /* Audio Playing style */

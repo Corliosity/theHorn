@@ -1,13 +1,6 @@
-Buglr.EpisodesView = Marionette.CollectionView.extend({
+Buglr.EpisodesView = Marionette.CompositeView.extend({
 	
-	tagName: 'ul',
-
-	className: 'podcast-episode-list',
-
-	childView: Buglr.EpisodeView,
-
-	intialize: function() {
-
-	}
-
+	childViewContainer: "ul",
+	template: '#list-layout',
+	childView: Buglr.EpisodeView
 });
