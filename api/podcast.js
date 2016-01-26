@@ -16,11 +16,7 @@ module.exports = (function() {
 
 	api.route('/json/episodes')
 		.get(function(req, res) {
-			/*
-			db.returnAllRows(function(results) {
-				res.json(results);
-			});
-			*/
+
 			data.getResults(connectionString, function(response) {
 				res.json(response);
 			});
@@ -83,10 +79,10 @@ module.exports = (function() {
 			res.header('Expires', '-1');
 			res.header('Pragma', 'no-cache');
 
-			db.returnAllRows(function(results) {
+			data.getResults(connectionString, function(response) {
 				return res.render('rss.jade', {
-					episodes: results,
-					host: req.headers.hostname
+					episodes	: response,
+					host 		: req.headers.hostname
 				});
 			});
 	});

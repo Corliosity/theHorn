@@ -1,18 +1,19 @@
-var connectionString = require('./config');
 var pg = require('pg');
 // Both JSON and RSS will wind up making a similar call to DB  put into one function
 // That will handle retrieving data from DB
 
 function DB() {
-	this._client;
-	this.results = [];
-	this.connectToDB = connectToDB;
-	this.getResults = getResults;
-	this.createRow = createRow;
-	this.updateRow = updateRow;
+	this._client 		= {};
+	this.results 		= [];
+	this.connectToDB 	= connectToDB;
+	this.getResults 	= getResults;
+	this.createRow 		= createRow;
+	this.updateRow 		= updateRow;
+	this.deleteRow		= deleteRow;
 }
 
 function connectToDB(connectionString) {
+	
 	this._client = new pg.Client(connectionString);
 	this._client.connect();
 
@@ -30,15 +31,19 @@ function getResults(connectionString, callback) {
 
 	query.on('end', function() {
 		dbConnection.end();
-		callback(self.results);
+		return callback(self.results);
 	});
 }
 
-function createRow(data) {
+function createRow(data, callback) {
 
 }
 
-function updateRow(data) {
+function updateRow(data, callback) {
+
+}
+
+function deleteRow(callback) {
 
 }
 
