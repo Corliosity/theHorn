@@ -2,7 +2,8 @@ var express = require('express');
 var pg = require('pg');
 var path = require('path');
 var connectionString = require('./config');
-var db = require('./dbExports');
+var DB = require('./dbExports');
+var data = new DB();
 
 module.exports = (function() {
 	
@@ -15,9 +16,13 @@ module.exports = (function() {
 
 	api.route('/json/episodes')
 		.get(function(req, res) {
-
+			/*
 			db.returnAllRows(function(results) {
 				res.json(results);
+			});
+			*/
+			data.getResults(connectionString, function(response) {
+				res.json(response);
 			});
 
 		})

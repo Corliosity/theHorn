@@ -3,38 +3,43 @@ var pg = require('pg');
 // Both JSON and RSS will wind up making a similar call to DB  put into one function
 // That will handle retrieving data from DB
 
-var DB = {
-	connectToDB : function() {
-		var client = new pg.Client(connectionString);
+function DB() {
+	this._client;
+	this.results = [];
+	this.connectToDB = connectToDB;
+	this.getResults = getResults;
+	this.createRow = createRow;
+	this.updateRow = updateRow;
+}
 
-		client.connect();
+function connectToDB(connectionString) {
+	this._client = new pg.Client(connectionString);
+	this._client.connect();
 
-		return client;
-	},
+	return this._client;
+}
 
-	returnAllRows: function(callback) {
-		var results = [];
-		var dbConnection = this.connectToDB();
+function getResults(connectionString, callback) {
+	var self = this;
+	var dbConnection = this.connectToDB(connectionString);
+	var query = dbConnection.query('SELECT * FROM episodes ORDER BY id DESC');
 
-		var query = dbConnection.query('SELECT * FROM episodes ORDER BY id ASC');
+	query.on('row', function(row) {
+		self.results.push(row);
+	});
 
-		query.on('row', function(row) {
-			results.push(row);
-		});
+	query.on('end', function() {
+		dbConnection.end();
+		callback(self.results);
+	});
+}
 
-		query.on('end', function() {
-			dbConnection.end();
-			callback(results);
-		});
-	},
+function createRow(data) {
 
-	postToDataBase: function() {
+}
 
-	},
+function updateRow(data) {
 
-	updateRowInDataBase: function() {
-
-	}
 }
 
 module.exports = DB;
