@@ -13,7 +13,7 @@ function DB() {
 }
 
 function connectToDB(connectionString) {
-	
+
 	this._client = new pg.Client(connectionString);
 	this._client.connect();
 
@@ -48,39 +48,3 @@ function deleteRow(callback) {
 }
 
 module.exports = DB;
-
-/*
-exports.connectToDB = function() {
-	var client = new pg.Client(connectionString);
-
-	client.connect();
-
-	return client;
-};
-
-exports.getAllDB = function() {
-
-	var results = [];
-	var dbConnection = connectToDB();
-
-	var query = dbConnection.query('SELECT * FROM episodes ORDER BY id ASC');
-
-	query.on('row', function(row) {
-		results.push(row);
-	});
-
-	query.on('end', function() {
-		dbConnection.end();
-
-		return results;
-	});
-};
-
-exports.postToDB = function() {
-
-};
-
-exports.updateToDB = function() {
-
-};
-*/
