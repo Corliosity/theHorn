@@ -24,40 +24,6 @@ module.exports = (function() {
 		})
 		.post(function(req, res) {
 
-			var results = [];
-
-			var url = '/assets/media/' + req.body.epName;
-
-			var data = {
-				title : req.body.epTitle,
-				descrip: req.body.epDescrip,
-				updated: new Date(),
-				uri : url
-			};
-
-			pg.connect(connectionString, function(err, client, done) {
-
-				if (err) {
-					done();
-					return res.status(500).json({ success: false, data: err});
-				}
-
-				client.query('INSERT INTO episodes(title, episodeuri, description, updated) values($1,$2,$3,$4)',
-					[data.title, data.uri, data.descrip, data.updated]);
-
-				var query = client.query('SELECT * FROM episodes ORDER BY id');
-
-				query.on('row', function(row) {
-					results.push(row);
-				});
-
-				query.on('end', function(){
-					done();
-
-					return res.json(results);
-				});
-
-			});
 		});
 	api.route('/json/episodes/:id')
 		.get(function(req, res) {

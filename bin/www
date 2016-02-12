@@ -3,7 +3,29 @@
 var app = require('../server');
 var http = require('http');
 
-appPort = process.env.PORT || 3000;
+var cluster = require('cluster');
 
-app.server = http.createServer(app);
-app.server.listen(appPort);
+if (cluster.isMaster) {
+	var cnumCPUs = require('os').cpus().length;
+
+	for (var i = 0; i < numCPUs; i++) {
+		cluster.fork();
+	}
+
+	cluster.on('online', function(worker) {
+	
+	});
+
+	cluster.on('exit', function(worker, code, signal) {
+
+        cluster.fork();
+    });
+
+} else {
+
+	appPort = process.env.PORT || 3000;
+
+	app.server = http.createServer(app);
+	app.server.listen(appPort);
+}
+
