@@ -2,7 +2,7 @@
 rss(version='2.0', xmlns:itunes='http://www.itunes.com/dtds/podcast-1.0.dtd')
 	channel
 		title The Buglr
-		link <a href="https://www.buglrpodcast.com/api/v1/podcast/rss" rel="nofollow">http://www.buglrpodcast.com</a>
+		link:a(href="https://#{host}/api/v1/podcast/rss",rel="nofollow") http://www.buglrpodcast.com
 		description A collection of Bugle fans who wanted more Bugle...so we rolled our own podcast and website.
 		copyright Andrew Corliss 2015
 		itunes:subtitle A grab and mix of everything
@@ -10,9 +10,10 @@ rss(version='2.0', xmlns:itunes='http://www.itunes.com/dtds/podcast-1.0.dtd')
 		itunes:owner
 			itunes:name Andrew Corliss
 			itunes:email andrew.corliss@gmail.com
-		itunes:image
+		itunes:image(href="https://#{host}/assets/images/buglr-podcast.png")
 		itunes:category(text="Society &amp; Culture")
 		itunes:category(text="Political")
+		itunes:explicit true
 		language en-US
 		if episodes.length
 			lastBuildDate= new Date(episodes[0].updated).toUTCString()
@@ -23,7 +24,7 @@ rss(version='2.0', xmlns:itunes='http://www.itunes.com/dtds/podcast-1.0.dtd')
 				itunes:subtitle We make our own podcast so others do not have to
 				itunes:summary= episode.description
 				itunes:image
-				enclosure(url="http://www.buglrpodcast.com/#{episode.episodeuri}",length="20:00",type="audio/mpeg")
+				enclosure(url="http://#{host}/#{episode.episodeuri}",length="#{episode.duration}",type="audio/mpeg")
 				pubDate= new Date(episode.updated).toUTCString()
-				itunes:duration 20:00
-				guid <a href="https://www.buglrpodcast.com/#{episode.episodeuri}">https://www.buglrpodcast.com/#{episode.episodeuri}</a>
+				itunes:duration episode.duration
+				guid <a href="https://#{host}/#{episode.episodeuri}">https://#{host}/#{episode.episodeuri}</a>

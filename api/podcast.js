@@ -39,16 +39,15 @@ module.exports = (function() {
 	api.route('/rss/episodes')
 		.get(function(req, res) {
 			
-
-			res.header('Content-Type','text/xml');
 			res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
 			res.header('Expires', '-1');
 			res.header('Pragma', 'no-cache');
+			res.set('Content-Type', 'application/rss+xml');
 
 			data.getResults(connectionString, function(response) {
-				return res.render('rss.jade', {
-					episodes	: response,
-					host 		: req.headers.hostname
+				return res.render('rss', {
+					'episodes'	: response,
+					'host' 		: 'https://' + req.headers.host
 				});
 			});
 	});

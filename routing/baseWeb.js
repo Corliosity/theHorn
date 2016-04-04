@@ -8,7 +8,8 @@ router.use(function(req, res, next) {
 });
 
 router.get('/', function(request, response) {
-	response.render('index', { title : 'The Buglr', configURL : '/api/v1/json/episodes', nodeEnv: 'production' });	
+	console.log(request.headers.host);
+	response.render('index', { title : 'The Buglr', configURL : '/api/v1/json/episodes', nodeEnv: 'production', host: request.headers.hostname });	
 });
 
 router.get('/contact', function(request, response) {
